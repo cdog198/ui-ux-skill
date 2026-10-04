@@ -13,6 +13,15 @@ export function Logo() {
 export function Header() {
   const t = useT();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Show a dividing line under the bar once the page has scrolled.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -28,7 +37,6 @@ export function Header() {
   const links = [
     { href: "/#how", label: t.nav.how },
     { href: "/#pricing", label: t.nav.pricing },
-    { href: "/#work", label: t.nav.work },
     { href: "/examples", label: t.nav.examples },
     { href: "/#faq", label: t.nav.faq },
     { href: "/#about", label: t.nav.about },
@@ -39,7 +47,7 @@ export function Header() {
       <a href="#main" className="sr-only rounded bg-ink px-4 py-2 text-paper focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100]">
         {t.nav.skip}
       </a>
-      <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur">
+      <header className={`sticky top-0 z-50 bg-paper transition-shadow duration-200 ${scrolled ? "shadow-[0_1px_0_var(--color-line),0_8px_24px_-16px_rgb(0_0_0/0.18)]" : ""}`}>
         <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-5 sm:px-8">
           <Link href="/" aria-label="CPD Web Design, home">
             <Logo />

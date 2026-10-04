@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MessageCircle } from "lucide-react";
+import { Check, Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { contact, contactForm } from "@/config/site";
@@ -99,6 +99,14 @@ export function Contact() {
             <Mail aria-hidden className="size-5 shrink-0" />
             <span className="truncate">{contact.email}</span>
           </a>
+          <ul className="space-y-2 pt-6 text-cobalt-soft">
+            {t.contact.details.map((d) => (
+              <li key={d} className="flex gap-2.5">
+                <Check aria-hidden className="mt-1 size-4 shrink-0 text-white" strokeWidth={3} />
+                {d}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="rounded-[24px] bg-white p-6 text-ink sm:p-10 lg:col-span-8">

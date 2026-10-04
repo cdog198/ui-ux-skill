@@ -27,13 +27,13 @@ export function Section({
       <h2 id={headingId} className="heading text-[clamp(2.4rem,5.2vw,4.5rem)]">
         {title}
       </h2>
-      {intro && <p className={`mt-5 max-w-[58ch] text-lg leading-relaxed ${introColor}`}>{intro}</p>}
+      {intro && <p className={`mt-5 max-w-[58ch] text-lg leading-relaxed text-pretty ${introColor}`}>{intro}</p>}
     </>
   );
 
   return (
     <section id={id} aria-labelledby={headingId} className={bg}>
-      <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 lg:py-32">
+      <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 lg:py-28">
         {layout === "split" ? (
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-5">{head}</div>
@@ -42,7 +42,7 @@ export function Section({
         ) : (
           <>
             {head}
-            <div className="mt-14 lg:mt-16">{children}</div>
+            <div className="mt-12 lg:mt-14">{children}</div>
           </>
         )}
       </div>

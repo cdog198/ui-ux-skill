@@ -2,70 +2,73 @@
 
 import Link from "next/link";
 import { Photo } from "@/components/ui/Photo";
-import { portfolio, type PortfolioItem } from "@/config/site";
-import { useL, useT } from "@/lib/i18n";
+import { planById, portfolio, type PortfolioItem } from "@/config/site";
+import { examples } from "@/content/examples";
+import { formatEuro, useL, useLang, useT } from "@/lib/i18n";
 import { Section, btn } from "./Section";
 
-/** Items come from src/config/site.ts → portfolio. The first featured item gets the wide slot. */
+/**
+ * Example sites (and any real client work) from src/config/site.ts → portfolio.
+ * Layout: two large cards, then rows of three.
+ */
 export function Work() {
   const t = useT();
   return (
-    <Section id="work" title={t.work.title} intro={t.work.intro} tone="paper">
-      <ul className="grid gap-x-6 gap-y-12 md:grid-cols-2">
-        {portfolio.map((item) => (
-          <li key={item.title} className={item.featured ? "md:col-span-2" : ""}>
-            <WorkItem item={item} />
+    <Section id="work" title={t.work.title} intro={t.work.intro}>
+      <ul className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-6">
+        {portfolio.map((item, i) => (
+          <li key={item.title} className={i < 2 ? "lg:col-span-3" : "lg:col-span-2"}>
+            <WorkItem item={item} large={i < 2} />
           </li>
         ))}
       </ul>
+      <Link href="/examples" className={`${btn.secondary} mt-12`}>
+        {t.work.all}
+      </Link>
     </Section>
   );
 }
 
-function WorkItem({ item }: { item: PortfolioItem }) {
+function WorkItem({ item, large }: { item: PortfolioItem; large: boolean }) {
   const t = useT();
   const tr = useL();
+  const { lang } = useLang();
   const isDemo = !!item.href;
-  const label = isDemo ? t.work.view : item.url ? t.work.visit : t.work.soon;
+  const meta = isDemo ? examples.find((e) => `/examples/${e.slug}` === item.href) : undefined;
+  const plan = meta ? planById(meta.plan) : undefined;
+  const link = item.href ?? item.url;
 
-  const cover = (
-    <div
-      className={`relative overflow-hidden rounded-2xl ${item.featured ? "aspect-[16/9] md:aspect-[21/9]" : "aspect-[4/3]"}`}
-      style={{ background: item.cover.bg, color: item.cover.fg, ["--ph-bg" as string]: item.cover.bg, ["--ph-fg" as string]: item.cover.fg }}
-    >
-      {item.image ? (
-        <Photo src={item.image} alt="" label={item.title} sizes={item.featured ? "100vw" : "(min-width: 768px) 50vw, 100vw"} />
-      ) : (
-        // No screenshot yet: show the site's name as a plain cover.
-        <span className="absolute inset-0 flex items-center justify-center p-6 text-center">
-          <span className="headline text-[clamp(2.5rem,7vw,6rem)]">{item.title}</span>
-        </span>
-      )}
-    </div>
+  const body = (
+    <>
+      <div className="relative aspect-[16/10] overflow-hidden rounded-2xl ring-1 ring-black/5" style={{ background: item.cover.bg, ["--ph-bg" as string]: item.cover.bg, ["--ph-fg" as string]: item.cover.fg }}>
+        <Photo src={item.image} alt="" label={item.title} sizes={large ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"} className="object-top transition-transform duration-500 group-hover:scale-[1.02]" />
+      </div>
+      <div className="mt-4 flex items-start justify-between gap-4">
+        <div>
+          <h3 className={`font-semibold ${large ? "text-2xl" : "text-xl"}`}>{item.title}</h3>
+          <p className="text-muted">{tr(item.category)}</p>
+        </div>
+        {plan && (
+          <span className="shrink-0 rounded-full bg-sky px-3 py-1 text-sm font-medium">
+            {formatEuro(plan.monthly, lang)}
+            {t.pricing.perMonthShort}
+          </span>
+        )}
+      </div>
+      <p className="mt-2 max-w-[56ch] leading-relaxed text-muted">{tr(item.description)}</p>
+    </>
   );
 
+  if (!link) return <article>{body}</article>;
   return (
     <article>
-      {cover}
-      <div className="mt-4 flex items-baseline justify-between gap-4">
-        <h3 className="text-xl font-semibold">{item.title}</h3>
-        <span className="shrink-0 text-sm text-muted">{item.year}</span>
-      </div>
-      <p className="text-sm text-muted">{tr(item.category)}</p>
-      <p className="mt-2 max-w-[60ch] leading-relaxed">{tr(item.description)}</p>
-      {isDemo ? (
-        <Link href={item.href!} className={`${btn.link} mt-3 inline-block`}>
-          {label}
+      <a href={link} {...(isDemo ? {} : { target: "_blank", rel: "noopener noreferrer" })} className="group block rounded-2xl focus-visible:outline-offset-8">
+        {body}
+        <span className="mt-3 inline-block font-medium underline decoration-1 underline-offset-4 group-hover:decoration-2">
+          {isDemo ? t.work.view : t.work.visit}
           <span className="sr-only">: {item.title}</span>
-        </Link>
-      ) : item.url ? (
-        <a href={item.url} target="_blank" rel="noopener noreferrer" className={`${btn.link} mt-3 inline-block`}>
-          {label}
-          <span className="sr-only">: {item.title}</span>
-        </a>
-      ) : (
-        <p className="mt-3 text-sm text-muted">{label}</p>
-      )}
+        </span>
+      </a>
     </article>
   );
 }

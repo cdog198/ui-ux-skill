@@ -111,10 +111,11 @@ const en = {
     note: "Need something that isn't listed? Ask and I'll tell you whether it's included or what it would cost.",
   },
   work: {
-    title: "Recent work",
-    intro: "A real client site, plus example sites I built to show what different kinds of business would get.",
+    title: "Example sites",
+    intro: "Complete sites for made-up businesses in Rome, built the way I'd build yours. Open one and try it: the bookings, menus and language switch all work.",
     visit: "Visit site",
     view: "Open example",
+    all: "All example sites",
     soon: "Case study coming soon",
   },
   examples: {
@@ -182,6 +183,7 @@ const en = {
     whatsapp: "WhatsApp me",
     email: "Email me",
     or: "Or send a message here:",
+    details: ["I reply within one working day", "English or Italian, whichever you prefer", "Based in Rome, working with businesses anywhere"],
     form: {
       name: "Your name",
       business: "Business name",
@@ -323,10 +325,11 @@ const it: Dict = {
     note: "Ti serve qualcosa che non è in elenco? Chiedimelo e ti dico se è incluso o quanto costerebbe.",
   },
   work: {
-    title: "Lavori recenti",
-    intro: "Un sito reale per un cliente, più alcuni siti di esempio che ho realizzato per mostrare cosa otterrebbero diversi tipi di attività.",
+    title: "Siti di esempio",
+    intro: "Siti completi per attività immaginarie a Roma, realizzati come realizzerei il tuo. Aprine uno e provalo: prenotazioni, menu e cambio lingua funzionano davvero.",
     visit: "Visita il sito",
     view: "Apri l'esempio",
+    all: "Tutti i siti di esempio",
     soon: "Case study in arrivo",
   },
   examples: {
@@ -394,6 +397,7 @@ const it: Dict = {
     whatsapp: "Scrivimi su WhatsApp",
     email: "Mandami una email",
     or: "Oppure scrivimi qui:",
+    details: ["Rispondo entro un giorno lavorativo", "In italiano o in inglese, come preferisci", "Lavoro da Roma, con attività ovunque"],
     form: {
       name: "Il tuo nome",
       business: "Nome dell'attività",

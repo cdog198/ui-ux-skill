@@ -15,11 +15,11 @@ const ORDER = ["hotel", "salon", "restaurant", "yoga", "portfolio"];
 
 /** Desktop arc: horizontal offset (% of row), vertical drop (px) and stacking per position. */
 const ARC = [
-  { x: "-4%", y: 120, z: 1 },
-  { x: "16%", y: 50, z: 2 },
-  { x: "36%", y: 0, z: 3 },
-  { x: "56%", y: 50, z: 2 },
-  { x: "76%", y: 120, z: 1 },
+  { x: "1%", y: 110, z: 1 },
+  { x: "19%", y: 45, z: 2 },
+  { x: "37%", y: 0, z: 3 },
+  { x: "55%", y: 45, z: 2 },
+  { x: "73%", y: 110, z: 1 },
 ];
 
 /**
@@ -57,7 +57,7 @@ export function Hero() {
         {/* Example sites: swipeable row on phones, an arc on desktop */}
         <ul
           aria-label={t.hero.showcase}
-          className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-8 [scrollbar-width:none] sm:px-8 lg:relative lg:mx-auto lg:mt-16 lg:block lg:h-[440px] lg:max-w-[1320px] lg:overflow-visible lg:p-0 [&::-webkit-scrollbar]:hidden"
+          className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-8 [scrollbar-width:none] sm:px-8 lg:relative lg:mx-auto lg:mt-14 lg:block lg:h-[400px] lg:max-w-[1360px] lg:overflow-visible lg:p-0 [&::-webkit-scrollbar]:hidden"
         >
           {sites.map((ex, i) => (
             <m.li
@@ -65,10 +65,10 @@ export function Hero() {
               initial={reduce ? false : { y: 40 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.8, delay: 0.15 + Math.abs(i - 2) * 0.12, ease: [0.2, 0.7, 0.1, 1] }}
-              className="w-[80vw] max-w-[420px] shrink-0 snap-center lg:absolute lg:top-[var(--y)] lg:left-[var(--x)] lg:z-[var(--z)] lg:w-[28%] lg:max-w-none"
+              className="w-[80vw] max-w-[420px] shrink-0 snap-center lg:absolute lg:top-[var(--y)] lg:left-[var(--x)] lg:z-[var(--z)] lg:w-[26%] lg:max-w-none"
               style={{ ["--x" as string]: ARC[i].x, ["--y" as string]: `${ARC[i].y}px`, ["--z" as string]: ARC[i].z }}
             >
-              <SiteCard ex={ex} eager={i < 2} />
+              <SiteCard ex={ex} eager={i < 2} flip={i > 2} />
             </m.li>
           ))}
         </ul>
@@ -77,7 +77,7 @@ export function Hero() {
   );
 }
 
-function SiteCard({ ex, eager }: { ex: ExampleMeta; eager: boolean }) {
+function SiteCard({ ex, eager, flip }: { ex: ExampleMeta; eager: boolean; flip: boolean }) {
   const t = useT();
   const tr = useL();
   const { lang } = useLang();
@@ -87,7 +87,7 @@ function SiteCard({ ex, eager }: { ex: ExampleMeta; eager: boolean }) {
       href={`/examples/${ex.slug}`}
       className="group block overflow-hidden rounded-xl bg-white shadow-[0_30px_60px_-30px_rgb(20_40_120/0.5)] ring-1 ring-black/5 transition-transform duration-300 hover:-translate-y-2"
     >
-      <div className="flex items-center justify-between gap-2 border-b border-black/5 px-3 py-2">
+      <div className={`flex items-center justify-between gap-2 border-b border-black/5 px-3 py-2 ${flip ? "lg:flex-row-reverse" : ""}`}>
         <span className="truncate rounded-full bg-sky px-2.5 py-0.5 text-[11px] font-medium">
           {tr(ex.industry)} · {formatEuro(plan.monthly, lang)}
           {t.pricing.perMonthShort}
@@ -98,7 +98,7 @@ function SiteCard({ ex, eager }: { ex: ExampleMeta; eager: boolean }) {
         </span>
       </div>
       <div className="relative aspect-[16/10]">
-        <Image src={ex.screenshot} alt="" fill loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} sizes="(min-width: 1024px) 28vw, 80vw" className="object-cover object-top" />
+        <Image src={ex.screenshot} alt="" fill loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} sizes="(min-width: 1024px) 26vw, 80vw" className="object-cover object-top" />
       </div>
       <span className="sr-only">
         {ex.name}: {tr(ex.industry)}, {formatEuro(plan.monthly, lang)}

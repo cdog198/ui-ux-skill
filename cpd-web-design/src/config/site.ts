@@ -122,28 +122,15 @@ export type PortfolioItem = {
   year: string;
   category: L;
   description: L;
-  /** Screenshot path in /public (e.g. "/images/work/sevenhalflab.jpg") or remote URL. null shows a typographic cover. */
+  /** Screenshot path in /public (e.g. "/images/work/client.jpg") or remote URL. null shows a typographic cover. */
   image: string | null;
   /** Cover colours used when there's no image. */
   cover: { bg: string; fg: string };
   featured?: boolean;
 };
 
-/** Portfolio / recent work. Swap these out for real projects. */
+/** Example sites and client work shown in the "Example sites" section. Add real client projects here too. */
 export const portfolio: PortfolioItem[] = [
-  {
-    title: "Seven Half Lab",
-    url: "https://sevenhalflab.com",
-    year: "2026",
-    category: { en: "Studio website", it: "Sito per studio creativo" },
-    description: {
-      en: "Brand-led studio site with a custom grid and fast static hosting.", // PLACEHOLDER description
-      it: "Sito per studio creativo con griglia su misura e hosting statico veloce.",
-    },
-    image: null, // add a screenshot: "/images/work/sevenhalflab.jpg"
-    cover: { bg: "#2340D9", fg: "#FFFFFF" },
-    featured: true,
-  },
   {
     title: "Trattoria Alba",
     href: "/examples/restaurant",
