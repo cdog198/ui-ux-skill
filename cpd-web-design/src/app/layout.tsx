@@ -54,7 +54,7 @@ const jsonLd = {
   url: site.url,
   email: contact.email,
   telephone: contact.phoneDisplay,
-  image: `${site.url}/opengraph-image`,
+  image: `${site.url}/opengraph-image.png`,
   priceRange: `€${lowestMonthly}–€${Math.max(...pricing.plans.map((p) => p.monthly))}/month`,
   address: {
     "@type": "PostalAddress",

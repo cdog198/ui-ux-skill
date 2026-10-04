@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
 
+// Generated once at build time (required for the static export).
+export const dynamic = "force-static";
+
 // Example sites are fictional businesses and set to noindex, so they're left out here.
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
