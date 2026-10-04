@@ -1,6 +1,6 @@
 /**
  * DEMO: Marta Ricci Fotografia (fictional wedding & portrait photographer, Rome)
- * A one-page site: the kind of thing the €19 "One page" plan covers.
+ * A one-page site: the kind of thing the "One page" plan covers.
  */
 import { unsplash, type ExampleMeta, type Img } from "./types";
 

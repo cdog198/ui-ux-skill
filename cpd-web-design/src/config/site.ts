@@ -75,7 +75,7 @@ export const pricing = {
     {
       id: "onepage",
       name: { en: "One page", it: "Una pagina" },
-      monthly: 19,
+      monthly: 14,
       audience: { en: "For portfolios, freelancers, CVs, events and side projects.", it: "Per portfolio, freelance, CV, eventi e progetti personali." },
       includes: [
         { en: "A one-page site designed for you", it: "Un sito di una pagina progettato per te" },
@@ -172,7 +172,7 @@ export const portfolio: PortfolioItem[] = [
     href: "/examples/portfolio",
     year: "Demo",
     category: { en: "One-page portfolio · example site", it: "Portfolio di una pagina · sito di esempio" },
-    description: { en: "Filterable gallery, services and an enquiry form, on the €19 plan.", it: "Galleria con filtri, servizi e modulo di richiesta, con il piano da €19." },
+    description: { en: "Filterable gallery, services and an enquiry form, on the One page plan.", it: "Galleria con filtri, servizi e modulo di richiesta, con il piano Una pagina." },
     image: "/images/work/portfolio.jpg",
     cover: { bg: "#141414", fg: "#F4F3F1" },
   },
