@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+/* ── CPD design tokens: "Manifesto & Scontrino" ─────────────────── */
+@theme {
+  --color-paper: #f2ece1; /* travertine */
+  --color-paper-2: #e8e0d2;
+  --color-receipt: #fbf8f2;
+  --color-ink: #15120e; /* espresso */
+  --color-ink-2: #2a251f;
+  --color-muted: #5a5147; /* 6.6:1 on paper */
+  --color-muted-dark: #a79c8c; /* 6.9:1 on ink */
+  --color-rosso: #b8321a; /* 5.1:1 on paper; paper text on it 5.1:1 */
+  --color-rosso-bright: #e8462a; /* for use on ink: 4.75:1 */
+  --color-ochre: #e2a93b;
+  --color-line: #15120e26;
+
+  --font-display: var(--font-archivo), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --animate-marquee: marquee 38s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The poster voice: ultra-condensed, black, uppercase. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 62%;
+  font-variation-settings: "wdth" 62;
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+}
+
+.display-wide {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 112%;
+  font-variation-settings: "wdth" 112;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.outline-text {
+  -webkit-text-stroke: 1.5px var(--outline-color, var(--color-rosso));
+  -webkit-text-fill-color: transparent;
+}
+
+/* Receipt paper with a torn, zig-zag bottom edge. */
+.receipt-edge {
+  --tooth: 10px;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tooth) * 2) 100%;
+}
+
+.dotted-leader {
+  background-image: radial-gradient(currentColor 1px, transparent 1.4px);
+  background-size: 6px 6px;
+  background-position: 0 70%;
+  background-repeat: repeat-x;
+  opacity: 0.45;
+}
+
+/* Subtle paper grain, pure CSS (no image request). */
+.grain {
+  background-image:
+    radial-gradient(rgb(21 18 14 / 0.035) 1px, transparent 1px),
+    radial-gradient(rgb(21 18 14 / 0.025) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-rosso);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.on-ink :focus-visible {
+  outline-color: var(--color-ochre);
+}
+
+/* <details> accordions */
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
