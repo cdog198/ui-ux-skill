@@ -17,16 +17,14 @@ export function LaurelIcon({ className = "" }: { className?: string }) {
   );
 }
 
-/** Proof for a poster corner: awards in orange, otherwise the selection count. */
+/** Proof for a poster corner: awards in orange, then the selection count. */
 export function LaurelCount({ awards, selections }: { awards: number; selections: number }) {
   if (!awards && !selections) return null;
-  const award = awards > 0;
   return (
-    <span
-      className={`condensed inline-flex items-center gap-1.5 text-[0.8rem] leading-none ${award ? "text-settemezzo" : "text-schermo"}`}
-    >
-      <LaurelIcon className="h-4 w-5" />
-      {award ? `${awards} ${awards === 1 ? "premio" : "premi"}` : `${selections} selezioni`}
+    <span className="condensed inline-flex items-center gap-1.5 text-[0.8rem] leading-none">
+      <LaurelIcon className={`h-4 w-5 ${awards ? "text-settemezzo" : "text-schermo"}`} />
+      {awards > 0 && <span className="text-settemezzo">{awards === 1 ? "1 premio" : `${awards} premi`}</span>}
+      {selections > 0 && <span>{selections === 1 ? "1 selezione" : `${selections} selezioni`}</span>}
     </span>
   );
 }

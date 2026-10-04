@@ -61,6 +61,15 @@ a {
 .display-lg {
   font-size: clamp(2.8rem, 9vw, 9.5rem);
 }
+/* Phones: condensed type can run much larger before it wraps. */
+@media (max-width: 640px) {
+  .display-xl {
+    font-size: 23vw;
+  }
+  .display-lg {
+    font-size: 15vw;
+  }
+}
 .display-md {
   font-size: clamp(2.2rem, 5.5vw, 5.5rem);
 }

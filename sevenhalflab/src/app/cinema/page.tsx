@@ -26,7 +26,7 @@ export default function Cinema() {
         <h2 id="prodotti" className="wrap mb-5 text-lg text-schermo/80">
           i nostri film
         </h2>
-        <PosterWall films={produced} />
+        <PosterWall films={produced} cols={4} />
       </section>
     </SectionPage>
   );

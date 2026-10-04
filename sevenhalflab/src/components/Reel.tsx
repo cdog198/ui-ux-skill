@@ -63,6 +63,7 @@ export default function Reel({
         )}
         {/* Weight the bottom-left, where the type sits, so the frame stays legible. */}
         <div className="absolute inset-0 bg-[linear-gradient(to_top,rgb(13_34_48/0.92),rgb(13_34_48/0.25)_55%,rgb(13_34_48/0.45))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgb(13_34_48/0.7),transparent_60%)]" />
       </div>
 
       <div className="wrap relative flex w-full flex-col justify-end pt-32 pb-24 sm:pb-20">{children}</div>

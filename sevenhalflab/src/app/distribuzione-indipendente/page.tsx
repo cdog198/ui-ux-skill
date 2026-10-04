@@ -47,7 +47,7 @@ export default function Distribuzione() {
             {selections} selezioni, <span className="text-settemezzo">{awards} premi</span>
           </p>
         </div>
-        <PosterWall films={distributed} />
+        <PosterWall films={distributed} cols={4} />
       </section>
 
       <Cta lines={["il futuro è un foglio bianco:", "scriviamolo insieme"]} />

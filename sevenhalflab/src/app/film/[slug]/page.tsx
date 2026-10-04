@@ -113,9 +113,9 @@ export default async function FilmPage({ params }: PageProps<"/film/[slug]">) {
           <div className="md:sticky md:top-8">
             {film.poster ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={film.poster} alt={`Locandina di ${film.title}`} className="aspect-[2/3] w-full max-w-sm object-cover" />
+              <img src={film.poster} alt={`Locandina di ${film.title}`} className="aspect-[2/3] w-3/5 max-w-sm object-cover md:w-full" />
             ) : (
-              <div className="display display-md flex aspect-[2/3] max-w-sm items-end bg-fondale-2 p-5">{film.title}</div>
+              <div className="display display-md flex aspect-[2/3] w-3/5 max-w-sm items-end bg-fondale-2 p-5 md:w-full">{film.title}</div>
             )}
           </div>
         </div>
