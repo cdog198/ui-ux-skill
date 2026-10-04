@@ -52,7 +52,7 @@ const en = {
     payment: "Payment",
     paymentValue: "none",
     then: "Then each month",
-    from: "from {price}",
+    from: "{price}",
     covers: "hosting, SSL, backups, changes, support",
   },
   how: {
@@ -80,11 +80,12 @@ const en = {
   },
   pricing: {
     title: "Prices",
-    intro: "Every plan includes the design and build. The difference is how big the site is and how much I do for you each month.",
+    intro: "One plan, one price. The design and build are free; the monthly fee covers everything after that.",
     perMonth: "/month",
     vat: "+ VAT",
-    popular: "Most popular",
-    choose: "Choose {name}",
+    summary: "That's the whole price. No setup fee, no design fee, and no extra charges for hosting, updates or small changes.",
+    cta: "Get your free site",
+    includesTitle: "What's included",
     termTitle: "There's a {months}-month minimum term.",
     termBody:
       "That's how the design and build get paid for without an upfront fee. After {months} months it's month to month, and you can cancel with 30 days' notice.",
@@ -104,7 +105,7 @@ const en = {
     perMonthShort: "/mo",
     billed: "by the hour",
     included: "included",
-    basedOn: "Based on the {name} plan. Agency figures are typical for small Italian businesses.",
+    basedOn: "Agency figures are typical for small Italian businesses.",
   },
   catch: {
     title: "What's the catch?",
@@ -125,12 +126,9 @@ const en = {
   },
   industries: {
     title: "What you get for a restaurant or a hotel",
-    intro: "Every feature below works in the example sites. Each one is marked with the cheapest plan that includes it.",
-    feature: "Feature",
-    yes: "Included",
-    no: "Not included",
+    intro: "Every feature below is included in the {price} plan, and each one works in the example sites.",
     demo: "Open the {name} example",
-    note: "Need something that isn't listed? Most features can be added to any plan.",
+    note: "Need something that isn't listed? Ask and I'll tell you whether it's included or what it would cost.",
   },
   work: {
     title: "Recent work",
@@ -142,7 +140,7 @@ const en = {
   examples: {
     title: "Example sites",
     intro:
-      "Complete, working websites for two made-up businesses in Rome, built the way I'd build yours. Try the language switch and the booking forms, and turn on Features to see what each part is for and which plan includes it.",
+      "Complete, working websites for two made-up businesses in Rome, built the way I'd build yours. Try the language switch and the booking forms, and turn on Features to see what each part is for.",
     open: "Open example",
     more: "Salon, gym and shop examples are on the way. If you run one, I'd like to hear from you.",
     ask: "Get in touch",
@@ -168,19 +166,19 @@ const en = {
       },
       {
         q: "How long does it take?",
-        a: "Most sites go live one to two weeks after we first talk. A one-page Starter site can be ready in a few days; a Pro site with bookings takes two to three weeks. The main thing that slows it down is gathering photos and text, and I help with both.",
+        a: "Most sites go live one to two weeks after we first talk. The main thing that slows it down is gathering photos and text, and I help with both.",
       },
       {
         q: "Do you build sites in Italian?",
-        a: "Yes. I work in English and Italian and can build your site in either language or both, with a language switch like the one on this site. Two languages are included in the Pro plan and can be added to the others.",
+        a: "Yes. I work in English and Italian, and every site can have both, with a language switch like the one on this site. It's included in the price.",
       },
       {
         q: "What counts as a small change?",
-        a: "Anything that takes up to about 30 minutes: changing text, prices or opening hours, swapping photos, adding a dish or an event. New pages and new features are quoted separately, or included if you move up a plan.",
+        a: "Anything that takes up to about 30 minutes: changing text, prices or opening hours, swapping photos, adding a dish or an event. Up to three a month are included. New pages and new features are quoted separately.",
       },
       {
-        q: "Can I change plans later?",
-        a: "Yes, whenever you like. Upgrades take effect straight away; downgrades from the following month.",
+        q: "Is anything not included?",
+        a: "Bigger jobs: more than five pages, an online shop, new features or a full redesign. I'll quote those before doing any work, so there are no surprise invoices.",
       },
     ],
   },
@@ -206,8 +204,6 @@ const en = {
       email: "Email",
       need: "What do you need?",
       needPlaceholder: "For example: a site for my restaurant with the menu and online bookings",
-      tier: "Which plan are you thinking of?",
-      notSure: "Not sure yet",
       consent: "I agree to my details being used to reply to this enquiry, as described in the",
       privacy: "privacy policy",
       submit: "Send enquiry",
@@ -230,7 +226,7 @@ const en = {
   privacyPage: {
     title: "Privacy policy",
     placeholder:
-      "PLACEHOLDER: replace this page with your real privacy policy (GDPR). It should explain who you are, what data the contact form collects (name, business, email, message, preferred plan), why (to reply to enquiries), how long you keep it, which processors you use (e.g. Formspree, Vercel), and how people can access or delete their data.",
+      "PLACEHOLDER: replace this page with your real privacy policy (GDPR). It should explain who you are, what data the contact form collects (name, business, email, message), why (to reply to enquiries), how long you keep it, which processors you use (e.g. Formspree, Vercel), and how people can access or delete their data.",
   },
   notFound: {
     title: "This page doesn't exist",
@@ -284,7 +280,7 @@ const it: Dict = {
     payment: "Pagamento",
     paymentValue: "nessuno",
     then: "Poi ogni mese",
-    from: "da {price}",
+    from: "{price}",
     covers: "hosting, SSL, backup, modifiche, assistenza",
   },
   how: {
@@ -312,11 +308,12 @@ const it: Dict = {
   },
   pricing: {
     title: "Prezzi",
-    intro: "Ogni piano include design e sviluppo. Cambiano le dimensioni del sito e quanto faccio per te ogni mese.",
+    intro: "Un solo piano, un solo prezzo. Design e sviluppo sono gratis; il canone mensile copre tutto il resto.",
     perMonth: "/mese",
     vat: "+ IVA",
-    popular: "Il più scelto",
-    choose: "Scegli {name}",
+    summary: "È il prezzo completo. Nessun costo di attivazione, nessun costo di design e nessun extra per hosting, aggiornamenti o piccole modifiche.",
+    cta: "Il tuo sito gratis",
+    includesTitle: "Cosa è incluso",
     termTitle: "La durata minima è di {months} mesi.",
     termBody:
       "È così che design e sviluppo vengono pagati senza un costo iniziale. Dopo {months} mesi si va mese per mese, e puoi disdire con 30 giorni di preavviso.",
@@ -336,7 +333,7 @@ const it: Dict = {
     perMonthShort: "/mese",
     billed: "a ore",
     included: "incluso",
-    basedOn: "Calcolato sul piano {name}. Le cifre dell'agenzia sono tipiche per le piccole attività italiane.",
+    basedOn: "Le cifre dell'agenzia sono tipiche per le piccole attività italiane.",
   },
   catch: {
     title: "Dov'è la fregatura?",
@@ -357,12 +354,9 @@ const it: Dict = {
   },
   industries: {
     title: "Cosa ottieni per un ristorante o un hotel",
-    intro: "Tutte le funzioni qui sotto sono attive nei siti di esempio. Per ognuna è indicato il piano più economico che la include.",
-    feature: "Funzione",
-    yes: "Incluso",
-    no: "Non incluso",
+    intro: "Tutte le funzioni qui sotto sono incluse nel piano da {price} e sono attive nei siti di esempio.",
     demo: "Apri l'esempio {name}",
-    note: "Ti serve qualcosa che non è in elenco? Quasi tutte le funzioni si possono aggiungere a qualsiasi piano.",
+    note: "Ti serve qualcosa che non è in elenco? Chiedimelo e ti dico se è incluso o quanto costerebbe.",
   },
   work: {
     title: "Lavori recenti",
@@ -374,7 +368,7 @@ const it: Dict = {
   examples: {
     title: "Siti di esempio",
     intro:
-      "Siti completi e funzionanti per due attività immaginarie a Roma, realizzati come realizzerei il tuo. Prova il cambio lingua e i moduli di prenotazione, e attiva Funzioni per vedere a cosa serve ogni parte e quale piano la include.",
+      "Siti completi e funzionanti per due attività immaginarie a Roma, realizzati come realizzerei il tuo. Prova il cambio lingua e i moduli di prenotazione, e attiva Funzioni per vedere a cosa serve ogni parte.",
     open: "Apri l'esempio",
     more: "Stanno arrivando esempi per saloni, palestre e negozi. Se ne gestisci uno, scrivimi.",
     ask: "Contattami",
@@ -400,19 +394,19 @@ const it: Dict = {
       },
       {
         q: "Quanto tempo ci vuole?",
-        a: "La maggior parte dei siti va online una o due settimane dopo la prima chiacchierata. Un sito Starter di una pagina può essere pronto in pochi giorni; un sito Pro con prenotazioni richiede due o tre settimane. Di solito rallenta solo la raccolta di foto e testi, e ti aiuto con entrambi.",
+        a: "La maggior parte dei siti va online una o due settimane dopo la prima chiacchierata. Di solito rallenta solo la raccolta di foto e testi, e ti aiuto con entrambi.",
       },
       {
         q: "Fai siti in italiano?",
-        a: "Sì. Lavoro in italiano e in inglese e posso realizzare il sito in una lingua o in entrambe, con un cambio lingua come quello di questo sito. Due lingue sono incluse nel piano Pro e si possono aggiungere agli altri.",
+        a: "Sì. Lavoro in italiano e in inglese, e ogni sito può averle entrambe, con un cambio lingua come quello di questo sito. È incluso nel prezzo.",
       },
       {
         q: "Cosa si intende per piccola modifica?",
-        a: "Tutto ciò che richiede fino a circa 30 minuti: cambiare testi, prezzi o orari, sostituire foto, aggiungere un piatto o un evento. Nuove pagine e nuove funzioni si preventivano a parte, oppure sono incluse passando a un piano superiore.",
+        a: "Tutto ciò che richiede fino a circa 30 minuti: cambiare testi, prezzi o orari, sostituire foto, aggiungere un piatto o un evento. Ne sono incluse fino a tre al mese. Nuove pagine e nuove funzioni si preventivano a parte.",
       },
       {
-        q: "Posso cambiare piano più avanti?",
-        a: "Sì, quando vuoi. Il passaggio a un piano superiore vale subito; quello a un piano inferiore dal mese successivo.",
+        q: "C'è qualcosa che non è incluso?",
+        a: "I lavori più grandi: più di cinque pagine, un negozio online, nuove funzioni o un restyling completo. Te li preventivo prima di iniziare, così non ci sono fatture a sorpresa.",
       },
     ],
   },
@@ -438,8 +432,6 @@ const it: Dict = {
       email: "Email",
       need: "Di cosa hai bisogno?",
       needPlaceholder: "Per esempio: un sito per il mio ristorante con il menu e le prenotazioni online",
-      tier: "A quale piano stai pensando?",
-      notSure: "Non so ancora",
       consent: "Acconsento all'uso dei miei dati per rispondere a questa richiesta, come descritto nella",
       privacy: "privacy policy",
       submit: "Invia richiesta",
@@ -462,7 +454,7 @@ const it: Dict = {
   privacyPage: {
     title: "Privacy policy",
     placeholder:
-      "SEGNAPOSTO: sostituisci questa pagina con la tua privacy policy reale (GDPR). Deve spiegare chi sei, quali dati raccoglie il modulo di contatto (nome, attività, email, messaggio, piano preferito), perché (per rispondere alle richieste), per quanto tempo li conservi, quali fornitori usi (es. Formspree, Vercel) e come accedere ai propri dati o cancellarli.",
+      "SEGNAPOSTO: sostituisci questa pagina con la tua privacy policy reale (GDPR). Deve spiegare chi sei, quali dati raccoglie il modulo di contatto (nome, attività, email, messaggio), perché (per rispondere alle richieste), per quanto tempo li conservi, quali fornitori usi (es. Formspree, Vercel) e come accedere ai propri dati o cancellarli.",
   },
   notFound: {
     title: "Questa pagina non esiste",

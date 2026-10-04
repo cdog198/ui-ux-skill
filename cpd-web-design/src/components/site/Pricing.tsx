@@ -1,25 +1,45 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { pricing, type Tier, type TierId } from "@/config/site";
+import { pricing } from "@/config/site";
 import { fill, formatEuro, useL, useLang, useT } from "@/lib/i18n";
 import { Section, btn } from "./Section";
 
-/** Lets pricing buttons pre-select a plan in the contact form. */
-export const SELECT_PLAN_EVENT = "cpd:select-plan";
-export function selectPlan(id: TierId) {
-  window.dispatchEvent(new CustomEvent<TierId>(SELECT_PLAN_EVENT, { detail: id }));
-}
-
+/** One plan, one price. Values come from src/config/site.ts → pricing. */
 export function Pricing() {
   const t = useT();
+  const tr = useL();
+  const { lang } = useLang();
   const months = pricing.minimumTermMonths;
+
   return (
     <Section id="pricing" title={t.pricing.title} intro={t.pricing.intro}>
-      <div className="grid gap-5 lg:grid-cols-3 lg:items-stretch">
-        {pricing.tiers.map((tier) => (
-          <TierCard key={tier.id} tier={tier} />
-        ))}
+      <div className="on-green grid gap-10 rounded-md bg-green p-7 text-paper sm:p-10 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-5">
+          <p className="flex items-end gap-3">
+            <span className="display text-[clamp(6rem,14vw,9rem)]">{formatEuro(pricing.monthly, lang)}</span>
+            <span className="pb-2 text-lg text-green-soft">
+              {t.pricing.perMonth}
+              <br />
+              {t.pricing.vat}
+            </span>
+          </p>
+          <p className="mt-5 text-lg leading-relaxed text-green-soft">{t.pricing.summary}</p>
+          <a href="#contact" className={`${btn.primary} mt-7 min-h-13 px-7 text-lg`}>
+            {t.pricing.cta}
+          </a>
+        </div>
+        <div className="lg:col-span-7">
+          <h3 className="text-lg font-bold">{t.pricing.includesTitle}</h3>
+          <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            {pricing.includes.map((item) => (
+              <li key={item.en} className="flex gap-2.5">
+                <Check aria-hidden className="mt-1 size-4 shrink-0 text-ochre" strokeWidth={3} />
+                <span>{tr(item)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className="mt-10 max-w-[64ch]">
@@ -32,51 +52,11 @@ export function Pricing() {
   );
 }
 
-function TierCard({ tier }: { tier: Tier }) {
-  const t = useT();
-  const tr = useL();
-  const { lang } = useLang();
-  const popular = tier.popular;
-
-  return (
-    <div className={`flex flex-col rounded-md p-7 lg:p-8 ${popular ? "on-green bg-green text-paper" : "border border-ink/25"}`}>
-      <div className="flex items-baseline justify-between gap-3">
-        <h3 className="text-2xl font-bold">{tier.name}</h3>
-        {popular && <span className="text-sm font-semibold text-ochre">{t.pricing.popular}</span>}
-      </div>
-      <p className={`mt-1 leading-snug ${popular ? "text-green-soft" : "text-muted"}`}>{tr(tier.summary)}</p>
-
-      <p className="mt-6 flex items-end gap-2">
-        <span className="display text-[5.5rem]">{formatEuro(tier.monthly, lang)}</span>
-        <span className={`pb-1.5 text-sm ${popular ? "text-green-soft" : "text-muted"}`}>
-          {t.pricing.perMonth}
-          <br />
-          {t.pricing.vat}
-        </span>
-      </p>
-
-      <ul className="mt-6 flex-1 space-y-2.5">
-        {tier.features.map((f) => (
-          <li key={f.en} className="flex gap-2.5">
-            <Check aria-hidden className={`mt-1 size-4 shrink-0 ${popular ? "text-ochre" : "text-green"}`} strokeWidth={3} />
-            <span>{tr(f)}</span>
-          </li>
-        ))}
-      </ul>
-
-      <a href="#contact" onClick={() => selectPlan(tier.id)} className={`mt-8 ${popular ? btn.primary : btn.secondary}`}>
-        {fill(t.pricing.choose, { name: tier.name })}
-      </a>
-    </div>
-  );
-}
-
 /** Two printed receipts side by side: typical agency vs CPD, first year. */
 function Comparison() {
   const t = useT();
   const { lang } = useLang();
   const eur = (n: number) => formatEuro(n, lang);
-  const ref = pricing.tiers.find((x) => x.popular) ?? pricing.tiers[0];
   const a = pricing.agency;
   const ongoing = (a.hostingMonthly + a.maintenanceMonthly) * 12;
 
@@ -100,9 +80,9 @@ function Comparison() {
           due={`${eur(a.buildMin)}–${eur(a.buildMax)}`}
           year={`${eur(a.buildMin + ongoing)}–${eur(a.buildMax + ongoing)}`}
         />
-        <ReceiptCard title={t.pricing.you} rows={rows.map(([l, , v]) => [l, v])} due={eur(0)} year={eur(ref.monthly * 12)} ours />
+        <ReceiptCard title={t.pricing.you} rows={rows.map(([l, , v]) => [l, v])} due={eur(0)} year={eur(pricing.monthly * 12)} ours />
       </div>
-      <p className="mt-5 text-sm text-muted">{fill(t.pricing.basedOn, { name: ref.name })}</p>
+      <p className="mt-5 text-sm text-muted">{t.pricing.basedOn}</p>
     </div>
   );
 }

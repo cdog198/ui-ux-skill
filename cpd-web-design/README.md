@@ -16,14 +16,14 @@ npm run lint
 
 | What | File |
 | --- | --- |
-| **Prices, minimum term, buy-out fee, agency comparison** | `src/config/site.ts` → `pricing` |
+| **Price (€79/month), what's included, minimum term, buy-out fee, agency comparison** | `src/config/site.ts` → `pricing` |
 | Contact details (email, WhatsApp, phone, VAT no., your name/photo) | `src/config/site.ts` → `site`, `contact` |
 | **Portfolio / recent work** (incl. the sevenhalflab.com slot) | `src/config/site.ts` → `portfolio` |
 | Contact form endpoint (Formspree) | `src/config/site.ts` → `contactForm` or env `NEXT_PUBLIC_FORM_ENDPOINT` |
 | **All page copy, EN + IT** (headlines, FAQ, about text…) | `src/content/translations.ts` |
 | Restaurant demo content (menu, hours, reviews, images) | `src/content/examples/restaurant.ts` |
 | Hotel demo content (rooms, prices, guide, FAQ, images) | `src/content/examples/hotel.ts` |
-| Which demo feature belongs to which plan | `features` in each demo file above |
+| Feature list shown in each demo's overlay and on the home page | `features` in each demo file above |
 | Design tokens (colours, fonts) | `src/app/globals.css` (`@theme`) and `src/app/layout.tsx` |
 
 Placeholders to replace before launch are marked `PLACEHOLDER` in the code (prices, phone, VAT number, name, postal code), plus the privacy policy text in `translations.ts → privacyPage`.
@@ -38,7 +38,7 @@ Placeholders to replace before launch are marked `PLACEHOLDER` in the code (pric
 2. Put its endpoint (`https://formspree.io/f/xxxxxxx`) in `contactForm.endpoint` or the `NEXT_PUBLIC_FORM_ENDPOINT` env var.
 3. Until then, the form runs in **demo mode** (shows success, sends nothing, logs a console warning).
 
-The form sends JSON: `name, business, email, message, preferredPlan`, with a `_gotcha` honeypot for spam.
+The form sends JSON: `name, business, email, message`, with a `_gotcha` honeypot for spam.
 
 ## Adding another industry demo (salon, gym, shop…)
 

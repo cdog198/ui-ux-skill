@@ -56,7 +56,7 @@ const jsonLd = {
   email: contact.email,
   telephone: contact.phoneDisplay,
   image: `${site.url}/opengraph-image`,
-  priceRange: `€${Math.min(...pricing.tiers.map((x) => x.monthly))}–€${Math.max(...pricing.tiers.map((x) => x.monthly))}/month`,
+  priceRange: `€${pricing.monthly}/month`,
   address: {
     "@type": "PostalAddress",
     addressLocality: site.address.locality,
@@ -66,17 +66,17 @@ const jsonLd = {
   },
   areaServed: [{ "@type": "City", name: "Rome" }, { "@type": "Country", name: "Italy" }],
   knowsLanguage: ["en", "it"],
-  makesOffer: pricing.tiers.map((tier) => ({
+  makesOffer: {
     "@type": "Offer",
-    name: `${tier.name} website plan`,
-    description: tier.summary.en,
+    name: "Website design, build and care",
+    description: "Website designed and built for free, with hosting, updates, changes and support for a flat monthly fee.",
     priceSpecification: {
       "@type": "UnitPriceSpecification",
-      price: tier.monthly,
+      price: pricing.monthly,
       priceCurrency: "EUR",
       unitCode: "MON",
     },
-  })),
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

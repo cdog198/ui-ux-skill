@@ -13,7 +13,6 @@ export function Receipt() {
   const t = useT();
   const { lang } = useLang();
   const reduce = useReducedMotion();
-  const lowest = Math.min(...pricing.tiers.map((x) => x.monthly));
   const [stamp, setStamp] = useState("");
 
   // Date and time printed in Rome time, like a real till. Client-only to avoid hydration mismatch.
@@ -30,7 +29,7 @@ export function Receipt() {
     setStamp(now.replace(",", ""));
   }, []);
 
-  const monthly = fill(t.receipt.from, { price: formatEuro(lowest, lang) });
+  const monthly = fill(t.receipt.from, { price: formatEuro(pricing.monthly, lang) });
 
   return (
     <div className="relative mx-auto w-full max-w-[340px]">

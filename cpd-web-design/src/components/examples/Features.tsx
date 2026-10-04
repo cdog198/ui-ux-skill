@@ -3,9 +3,8 @@
 import { Layers, X } from "lucide-react";
 import Link from "next/link";
 import { createContext, useContext, useEffect, useState } from "react";
-import { pricing } from "@/config/site";
 import type { FeatureDef } from "@/content/examples/types";
-import { useL, useLang } from "@/lib/i18n";
+import { useL } from "@/lib/i18n";
 
 type Ctx = { show: boolean; features: FeatureDef[] };
 const FeatureCtx = createContext<Ctx>({ show: false, features: [] });
@@ -15,8 +14,6 @@ const ui = {
   cta: { en: "Get one like this free", it: "Ottienine uno così, gratis" },
   show: { en: "Show features", it: "Mostra funzioni" },
   hide: { en: "Hide features", it: "Nascondi funzioni" },
-  plan: { en: "plan", it: "piano" },
-  from: { en: "from", it: "dal" },
 };
 
 /**
@@ -90,10 +87,8 @@ export function FeatureZone({
 }) {
   const { show, features } = useContext(FeatureCtx);
   const tr = useL();
-  const { lang } = useLang();
   const index = features.findIndex((f) => f.id === id);
   const feature = features[index];
-  const tier = feature ? pricing.tiers.find((t) => t.id === feature.tier) : undefined;
 
   const pos = {
     "top-left": "top-3 left-3",
@@ -119,11 +114,6 @@ export function FeatureZone({
               <span className="text-sm leading-tight font-bold">{tr(feature.label)}</span>
             </span>
             <span className="mt-1.5 block text-xs leading-snug text-[#C9D6CF]">{tr(feature.description)}</span>
-            {tier && (
-              <span className="mt-2 inline-block rounded-[3px] border border-[#F0B23E] px-2 py-0.5 text-[11px] font-semibold text-[#F0B23E]">
-                {lang === "it" ? `${tr(ui.from)} ${tr(ui.plan)} ${tier.name}` : `${tier.name} ${tr(ui.plan)}+`}
-              </span>
-            )}
           </span>
         </>
       )}

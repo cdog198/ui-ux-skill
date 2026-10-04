@@ -1,18 +1,19 @@
 "use client";
 
-import { Check, Minus } from "lucide-react";
+import { Check } from "lucide-react";
 import Link from "next/link";
 import { useId, useState } from "react";
 import { Photo } from "@/components/ui/Photo";
-import { pricing, tierRank } from "@/config/site";
+import { pricing } from "@/config/site";
 import { examples } from "@/content/examples";
-import { fill, useL, useT } from "@/lib/i18n";
+import { fill, formatEuro, useL, useLang, useT } from "@/lib/i18n";
 import { Section, btn } from "./Section";
 
-/** Demo features mapped to the cheapest plan that includes them. */
+/** What each example site includes. Everything is in the one plan. */
 export function Industries() {
   const t = useT();
   const tr = useL();
+  const { lang } = useLang();
   const [active, setActive] = useState(0);
   const baseId = useId();
   const ex = examples[active];
@@ -25,7 +26,7 @@ export function Industries() {
   };
 
   return (
-    <Section id="industries" title={t.industries.title} intro={t.industries.intro}>
+    <Section id="industries" title={t.industries.title} intro={fill(t.industries.intro, { price: `${formatEuro(pricing.monthly, lang)}${t.pricing.perMonth}` })}>
       <div role="tablist" aria-label={t.industries.title} className="inline-flex rounded-[4px] border border-ink p-0.5" onKeyDown={onKeyDown}>
         {examples.map((x, i) => (
           <button
@@ -57,56 +58,17 @@ export function Industries() {
         </div>
 
         <div className="lg:col-span-8">
-          {/* Phones: one line per feature with its plan */}
-          <ul className="sm:hidden">
-            {ex.features.map((f) => {
-              const tier = pricing.tiers.find((x) => x.id === f.tier);
-              return (
-                <li key={f.id} className="flex items-start justify-between gap-4 border-b border-line py-3">
-                  <span>
-                    <span className="block font-semibold">{tr(f.label)}</span>
-                    <span className="block text-sm text-muted">{tr(f.description)}</span>
-                  </span>
-                  <span className="shrink-0 text-sm font-semibold">{tier?.name}+</span>
-                </li>
-              );
-            })}
+          <ul className="grid gap-x-8 sm:grid-cols-2">
+            {ex.features.map((f) => (
+              <li key={f.id} className="flex gap-3 border-b border-line py-3">
+                <Check aria-hidden className="mt-1 size-4 shrink-0 text-green" strokeWidth={3} />
+                <span>
+                  <span className="block font-semibold">{tr(f.label)}</span>
+                  <span className="block text-sm text-muted">{tr(f.description)}</span>
+                </span>
+              </li>
+            ))}
           </ul>
-
-          <table className="hidden w-full border-collapse text-left sm:table">
-            <caption className="sr-only">{tr(ex.industry)}</caption>
-            <thead>
-              <tr className="border-b border-ink">
-                <th scope="col" className="py-3 pr-4 text-sm font-semibold">
-                  {t.industries.feature}
-                </th>
-                {pricing.tiers.map((tier) => (
-                  <th key={tier.id} scope="col" className="w-24 py-3 text-center text-sm font-semibold">
-                    {tier.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {ex.features.map((f) => (
-                <tr key={f.id} className="border-b border-line">
-                  <th scope="row" className="py-3 pr-4 font-normal">
-                    <span className="block font-semibold">{tr(f.label)}</span>
-                    <span className="block text-sm text-muted">{tr(f.description)}</span>
-                  </th>
-                  {pricing.tiers.map((tier) => (
-                    <td key={tier.id} className="text-center">
-                      {tierRank[tier.id] >= tierRank[f.tier] ? (
-                        <Check aria-label={t.industries.yes} className="mx-auto size-5 text-green" strokeWidth={3} />
-                      ) : (
-                        <Minus aria-label={t.industries.no} className="mx-auto size-4 text-ink/30" />
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
           <p className="mt-4 text-sm text-muted">{t.industries.note}</p>
         </div>
       </div>

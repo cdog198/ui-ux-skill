@@ -1,16 +1,13 @@
-import type { TierId } from "@/config/site";
 import type { L } from "@/lib/i18n";
 
 /**
  * A feature shown in the "Features" overlay of a demo site and in the
- * "What you get" table on the home page. `tier` is the cheapest plan
- * that includes it.
+ * "What you get" list on the home page. All features are in the one plan.
  */
 export type FeatureDef = {
   id: string;
   label: L;
   description: L;
-  tier: TierId;
 };
 
 /** Lightweight info about an example site, used by the home page and /examples. */

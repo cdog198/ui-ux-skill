@@ -51,68 +51,25 @@ export const contactForm = {
   endpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "https://formspree.io/f/YOUR_FORM_ID",
 };
 
-export type TierId = "starter" | "business" | "pro";
-
-export type Tier = {
-  id: TierId;
-  name: string;
-  /** Monthly price in euro. PLACEHOLDER values: set your real prices here. */
-  monthly: number;
-  popular?: boolean;
-  summary: L;
-  features: L[];
-};
-
 export const pricing = {
-  /** Minimum term in months. Shown in pricing, FAQ and "the catch". */
+  /** One plan, one price. Monthly price in euro, excluding VAT. */
+  monthly: 79,
+  /** Minimum term in months. Shown in pricing, FAQ and "What's the catch?". */
   minimumTermMonths: 12,
   /** Fee to take full ownership of the design and code if you leave (FAQ). PLACEHOLDER. */
   buyoutFee: 500,
-  tiers: [
-    {
-      id: "starter",
-      name: "Starter",
-      monthly: 39, // PLACEHOLDER
-      summary: { en: "A sharp one-page site that gets you found.", it: "Un sito di una pagina, curato, che ti fa trovare." },
-      features: [
-        { en: "One-page website, designed for you", it: "Sito di una pagina, progettato per te" },
-        { en: "Fast hosting + SSL certificate", it: "Hosting veloce + certificato SSL" },
-        { en: "Monthly updates & security patches", it: "Aggiornamenti e patch di sicurezza mensili" },
-        { en: "Daily backups", it: "Backup giornalieri" },
-        { en: "1 content edit per month", it: "1 modifica dei contenuti al mese" },
-        { en: "Email support", it: "Supporto via email" },
-      ],
-    },
-    {
-      id: "business",
-      name: "Business",
-      monthly: 69, // PLACEHOLDER
-      popular: true,
-      summary: { en: "Everything a local business needs to win customers.", it: "Tutto ciò che serve a un'attività locale per farsi scegliere." },
-      features: [
-        { en: "Up to 5 pages", it: "Fino a 5 pagine" },
-        { en: "Contact & enquiry forms", it: "Moduli di contatto e richiesta" },
-        { en: "Google Maps + Google Business Profile setup", it: "Google Maps + configurazione Google Business Profile" },
-        { en: "3 content edits per month", it: "3 modifiche dei contenuti al mese" },
-        { en: "Basic SEO (titles, meta, local search)", it: "SEO di base (titoli, meta, ricerca locale)" },
-        { en: "Everything in Starter", it: "Tutto ciò che è incluso in Starter" },
-      ],
-    },
-    {
-      id: "pro",
-      name: "Pro",
-      monthly: 119, // PLACEHOLDER
-      summary: { en: "For businesses that take bookings and publish often.", it: "Per chi riceve prenotazioni e pubblica spesso." },
-      features: [
-        { en: "Up to 10 pages", it: "Fino a 10 pagine" },
-        { en: "Blog or booking integration", it: "Blog o sistema di prenotazione integrato" },
-        { en: "Priority support (same-day replies)", it: "Supporto prioritario (risposta in giornata)" },
-        { en: "Unlimited small edits", it: "Piccole modifiche illimitate" },
-        { en: "Bilingual site (English + Italian)", it: "Sito bilingue (italiano + inglese)" },
-        { en: "Everything in Business", it: "Tutto ciò che è incluso in Business" },
-      ],
-    },
-  ] satisfies Tier[] as Tier[],
+  /** What the €79/month includes. PLACEHOLDER list: edit to match what you actually offer. */
+  includes: [
+    { en: "A custom-designed site, up to 5 pages", it: "Un sito progettato su misura, fino a 5 pagine" },
+    { en: "English and Italian versions", it: "Versione italiana e inglese" },
+    { en: "Hosting, SSL and daily backups", it: "Hosting, SSL e backup giornalieri" },
+    { en: "Updates and security patches", it: "Aggiornamenti e patch di sicurezza" },
+    { en: "Contact, enquiry or booking forms", it: "Moduli di contatto, richiesta o prenotazione" },
+    { en: "Google Maps and Google Business Profile setup", it: "Google Maps e configurazione di Google Business Profile" },
+    { en: "Basic SEO for local search", it: "SEO di base per la ricerca locale" },
+    { en: "Up to 3 small changes a month", it: "Fino a 3 piccole modifiche al mese" },
+    { en: "Support by WhatsApp and email", it: "Assistenza via WhatsApp e email" },
+  ] satisfies L[],
   /** Typical agency costs, used in the comparison receipt. */
   agency: {
     buildMin: 1500,
@@ -121,8 +78,6 @@ export const pricing = {
     maintenanceMonthly: 50,
   },
 };
-
-export const tierRank: Record<TierId, number> = { starter: 0, business: 1, pro: 2 };
 
 export type PortfolioItem = {
   title: string;

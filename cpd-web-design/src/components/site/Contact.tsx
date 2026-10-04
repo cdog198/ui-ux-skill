@@ -2,16 +2,15 @@
 
 import { Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { contact, contactForm, pricing, type TierId } from "@/config/site";
+import { useState } from "react";
+import { contact, contactForm } from "@/config/site";
 import { useT } from "@/lib/i18n";
-import { SELECT_PLAN_EVENT } from "./Pricing";
 import { Section, btn } from "./Section";
 
 type Status = "idle" | "sending" | "success" | "error";
-type Fields = { name: string; business: string; email: string; need: string; tier: TierId | "unsure"; consent: boolean };
+type Fields = { name: string; business: string; email: string; need: string; consent: boolean };
 
-const empty: Fields = { name: "", business: "", email: "", need: "", tier: "business", consent: false };
+const empty: Fields = { name: "", business: "", email: "", need: "", consent: false };
 
 export function Contact() {
   const t = useT();
@@ -20,15 +19,6 @@ export function Contact() {
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({});
   const [status, setStatus] = useState<Status>("idle");
 
-  // Pricing "Choose plan" buttons pre-select the plan here.
-  useEffect(() => {
-    const onSelect = (e: Event) => {
-      const id = (e as CustomEvent<TierId>).detail;
-      setFields((prev) => ({ ...prev, tier: id }));
-    };
-    window.addEventListener(SELECT_PLAN_EVENT, onSelect);
-    return () => window.removeEventListener(SELECT_PLAN_EVENT, onSelect);
-  }, []);
 
   const set = <K extends keyof Fields>(key: K, value: Fields[K]) => {
     setFields((prev) => ({ ...prev, [key]: value }));
@@ -82,7 +72,6 @@ export function Contact() {
           business: fields.business,
           email: fields.email,
           message: fields.need,
-          preferredPlan: fields.tier,
           _subject: `New website enquiry: ${fields.business || fields.name}`,
         }),
       });
@@ -94,10 +83,6 @@ export function Contact() {
     }
   };
 
-  const tiers: { id: Fields["tier"]; label: string }[] = [
-    ...pricing.tiers.map((x) => ({ id: x.id, label: x.name })),
-    { id: "unsure", label: f.notSure },
-  ];
 
   const input =
     "mt-1.5 block w-full min-h-12 rounded-[4px] border border-ink/30 bg-white px-3.5 text-ink placeholder:text-muted/80 focus:border-ink focus:outline-2 focus:outline-offset-0 focus:outline-ink";
@@ -138,17 +123,6 @@ export function Contact() {
                 <textarea id="contact-need" name="message" rows={4} required placeholder={f.needPlaceholder} value={fields.need} onChange={(e) => set("need", e.target.value)} aria-invalid={!!errors.need} aria-describedby={errors.need ? "contact-need-error" : undefined} className={`${input} resize-y py-3`} />
               </Field>
 
-              <fieldset className="sm:col-span-2">
-                <legend className="font-semibold">{f.tier}</legend>
-                <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
-                  {tiers.map((tier) => (
-                    <label key={tier.id} className="flex min-h-10 cursor-pointer items-center gap-2">
-                      <input type="radio" name="tier" value={tier.id} checked={fields.tier === tier.id} onChange={() => set("tier", tier.id)} className="size-4 accent-[var(--color-green)]" />
-                      {tier.label}
-                    </label>
-                  ))}
-                </div>
-              </fieldset>
 
               {/* Honeypot (hidden from people and screen readers) */}
               <div aria-hidden="true" className="hidden">
