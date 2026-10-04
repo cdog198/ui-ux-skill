@@ -69,8 +69,11 @@ export function Receipt() {
           <div aria-hidden className="mt-3 border-t border-dashed border-ink/50 pt-2">
             <p className="flex items-baseline justify-between pt-3 font-semibold">
               <span>{t.receipt.total}</span>
-              {/* Tills print the total double-height */}
-              <span className="origin-bottom scale-y-[1.9] text-[22px] leading-none">0,00</span>
+              {/* Tills print the total double-height; someone has gone over it with a highlighter */}
+              <span className="relative">
+                <span aria-hidden className="absolute -inset-x-1.5 -top-6 bottom-[-4px] -rotate-2 rounded-sm bg-sun/80" />
+                <span className="relative inline-block origin-bottom scale-y-[1.9] text-[22px] leading-none">0,00</span>
+              </span>
             </p>
             <p className="mt-2 flex justify-between">
               <span>{t.receipt.vat}</span>

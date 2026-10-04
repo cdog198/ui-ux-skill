@@ -21,7 +21,7 @@ export function SimplePage({ kind }: { kind: "privacy" | "notFound" }) {
   return (
     <section className="mx-auto max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
       <h1 className="heading text-[clamp(2.5rem,6vw,4.5rem)]">{t.privacyPage.title}</h1>
-      <p className="mt-8 border-l-4 border-ochre pl-5 text-lg leading-relaxed text-muted">{t.privacyPage.placeholder}</p>
+      <p className="mt-8 border-l-4 border-cobalt pl-5 text-lg leading-relaxed text-muted">{t.privacyPage.placeholder}</p>
     </section>
   );
 }

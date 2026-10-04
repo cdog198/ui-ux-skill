@@ -1,14 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import { Providers } from "@/components/ui/Providers";
 import { contact, pricing, site } from "@/config/site";
 import { translations } from "@/content/translations";
 import "./globals.css";
 
-const archivo = Archivo({
+const schibsted = Schibsted_Grotesk({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+  variable: "--font-schibsted",
   display: "swap",
 });
 
@@ -17,7 +16,7 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "600"],
   variable: "--font-plex-mono",
   display: "swap",
-  preload: false, // only used inside receipts; let Archivo load first
+  preload: false, // only used inside receipts; let the main font load first
 });
 
 const t = translations.en;
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1F4D3B",
+  themeColor: "#2340D9",
 };
 
 /** Structured data: tells Google this is a local web-design business in Rome. */
@@ -81,7 +80,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${schibsted.variable} ${plexMono.variable}`}>
       <body>
         <script
           type="application/ld+json"

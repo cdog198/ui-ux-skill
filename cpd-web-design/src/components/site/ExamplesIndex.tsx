@@ -21,11 +21,11 @@ export function ExamplesIndex() {
           <li key={ex.slug}>
             <article>
               <Link href={`/examples/${ex.slug}`} className="block" tabIndex={-1} aria-hidden>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-md" style={{ background: ex.palette.bg, ["--ph-bg" as string]: ex.palette.bg, ["--ph-fg" as string]: ex.palette.fg }}>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl" style={{ background: ex.palette.bg, ["--ph-bg" as string]: ex.palette.bg, ["--ph-fg" as string]: ex.palette.fg }}>
                   <Photo src={ex.cover} alt="" label={ex.name} sizes="(min-width: 768px) 50vw, 100vw" />
                 </div>
               </Link>
-              <h2 className="mt-4 text-2xl font-bold">{ex.name}</h2>
+              <h2 className="mt-4 text-2xl font-semibold">{ex.name}</h2>
               <p className="text-muted">
                 {tr(ex.industry)}, {ex.location}
               </p>

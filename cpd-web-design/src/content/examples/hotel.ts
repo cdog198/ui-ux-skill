@@ -24,7 +24,7 @@ export const hotelMeta: ExampleMeta = {
   industry: { en: "Boutique hotel", it: "Hotel boutique" },
   tagline: { en: "Twelve rooms in a 16th-century palazzo", it: "Dodici camere in un palazzo del Cinquecento" },
   location: "Centro Storico, Roma",
-  cover: unsplash("1618773928121-c32242e63f39"),
+  cover: unsplash("1590490360182-c33d57733427"),
   palette: { bg: "#14202B", fg: "#EDE7DC", accent: "#C9A66B" },
   features: [
     { id: "hero", label: { en: "Full-screen hero", it: "Hero a schermo intero" }, description: { en: "Sets the mood before guests read a word.", it: "Crea l'atmosfera prima ancora di leggere." } },
@@ -62,7 +62,7 @@ export const hotel = {
   hero: {
     eyebrow: { en: "Boutique hotel · Centro Storico", it: "Hotel boutique · Centro Storico" },
     title: { en: "A quiet palazzo on Rome's most beautiful street.", it: "Un palazzo silenzioso sulla via più bella di Roma." },
-    image: { src: unsplash("1618773928121-c32242e63f39"), alt: { en: "An elegant hotel bedroom with soft light", it: "Un'elegante camera d'albergo con luce soffusa" } } as Img,
+    image: { src: unsplash("1590490360182-c33d57733427"), alt: { en: "A classic bedroom with tall curtains and a tufted sofa", it: "Una camera classica con tende alte e un divano capitonné" } } as Img,
     checkIn: { en: "Check-in", it: "Arrivo" },
     checkOut: { en: "Check-out", it: "Partenza" },
     guests: { en: "Guests", it: "Ospiti" },
@@ -98,7 +98,7 @@ export const hotel = {
       images: [
         { src: unsplash("1611892440504-42a792e24d32"), alt: { en: "Classic Double bedroom", it: "Camera Doppia Classic" } },
         { src: unsplash("1590490360182-c33d57733427"), alt: { en: "Classic Double, view of the bed", it: "Doppia Classic, vista del letto" } },
-        { src: unsplash("1584132967334-10e028bd69f7"), alt: { en: "Classic Double bathroom", it: "Bagno della Doppia Classic" } },
+        { src: unsplash("1618773928121-c32242e63f39"), alt: { en: "Classic Double, bedside detail", it: "Doppia Classic, dettaglio del comodino" } },
       ],
     },
     {
@@ -212,12 +212,12 @@ export const hotel = {
   gallery: {
     title: { en: "A look inside", it: "Uno sguardo dentro" },
     images: [
-      { src: unsplash("1551882547-ff40c63fe5fa"), alt: { en: "The hotel lobby", it: "La hall dell'hotel" } },
+      { src: unsplash("1590490360182-c33d57733427"), alt: { en: "A classic room with a tufted sofa", it: "Una camera classica con divano capitonné" } },
       { src: unsplash("1631049307264-da0ec9d70304"), alt: { en: "A Deluxe room", it: "Una camera Deluxe" } },
-      { src: unsplash("1582719478250-c89cae4dc85b"), alt: { en: "Suite sitting area", it: "Il salotto della suite" } },
-      { src: unsplash("1566073771259-6a8506099945"), alt: { en: "The terrace at dusk", it: "La terrazza al tramonto" } },
-      { src: unsplash("1590490360182-c33d57733427"), alt: { en: "A made bed in morning light", it: "Un letto rifatto nella luce del mattino" } },
-      { src: unsplash("1542314831-068cd1dbfeeb"), alt: { en: "The hotel at night", it: "L'hotel di notte" } },
+      { src: unsplash("1529260830199-42c24126f198"), alt: { en: "St Peter's dome over the Tiber, ten minutes' walk away", it: "La cupola di San Pietro sul Tevere, a dieci minuti a piedi" } },
+      { src: unsplash("1618773928121-c32242e63f39"), alt: { en: "A made bed in morning light", it: "Un letto rifatto nella luce del mattino" } },
+      { src: unsplash("1611892440504-42a792e24d32"), alt: { en: "A warm-toned double room", it: "Una camera doppia dai toni caldi" } },
+      { src: unsplash("1578683010236-d716f9a3f461"), alt: { en: "A suite with tall windows", it: "Una suite con finestre alte" } },
     ] as Img[],
   },
   reviews: {
@@ -235,8 +235,8 @@ export const hotel = {
     items: [
       { title: { en: "The Colosseum at opening time", it: "Il Colosseo all'apertura" }, body: { en: "Go at 8:30 with pre-booked tickets and beat the crowds.", it: "Andate alle 8:30 con biglietti prenotati e battete la folla." }, distance: { en: "12 min by taxi", it: "12 min in taxi" }, image: { src: unsplash("1552832230-c0197dd311b5"), alt: { en: "The Colosseum", it: "Il Colosseo" } } },
       { title: { en: "St Peter's & the Vatican", it: "San Pietro e il Vaticano" }, body: { en: "Walk across Ponte Vittorio Emanuele II. Climb the dome for the view.", it: "Attraversate Ponte Vittorio Emanuele II. Salite sulla cupola per la vista." }, distance: { en: "20 min walk", it: "20 min a piedi" }, image: { src: unsplash("1531572753322-ad063cecc140"), alt: { en: "St Peter's Basilica", it: "La Basilica di San Pietro" } } },
-      { title: { en: "Evening in Trastevere", it: "Una sera a Trastevere" }, body: { en: "Cross Ponte Sisto for aperitivo, then get lost in the lanes.", it: "Attraversate Ponte Sisto per l'aperitivo, poi perdetevi nei vicoli." }, distance: { en: "6 min walk", it: "6 min a piedi" }, image: { src: unsplash("1529260830199-42c24126f198"), alt: { en: "A street in Trastevere", it: "Una via di Trastevere" } } },
-      { title: { en: "Morning market at Campo de' Fiori", it: "Il mercato di Campo de' Fiori" }, body: { en: "Fruit, flowers and the best pizza bianca at Forno Campo de' Fiori.", it: "Frutta, fiori e la miglior pizza bianca al Forno Campo de' Fiori." }, distance: { en: "4 min walk", it: "4 min a piedi" }, image: { src: unsplash("1525874684015-58379d421a52"), alt: { en: "A Roman piazza", it: "Una piazza romana" } } },
+      { title: { en: "Sunset on the Tiber", it: "Tramonto sul Tevere" }, body: { en: "Walk the river to Ponte Sant'Angelo for the classic view of St Peter's.", it: "Passeggiate lungo il fiume fino a Ponte Sant'Angelo per la vista classica su San Pietro." }, distance: { en: "10 min walk", it: "10 min a piedi" }, image: { src: unsplash("1529260830199-42c24126f198"), alt: { en: "St Peter's dome and Ponte Sant'Angelo at sunset", it: "La cupola di San Pietro e Ponte Sant'Angelo al tramonto" } } },
+      { title: { en: "Trevi Fountain before breakfast", it: "Fontana di Trevi prima di colazione" }, body: { en: "Go before 8am and you'll have it almost to yourself.", it: "Andateci prima delle 8 e l'avrete quasi tutta per voi." }, distance: { en: "20 min walk", it: "20 min a piedi" }, image: { src: unsplash("1525874684015-58379d421a52"), alt: { en: "The Trevi Fountain", it: "La Fontana di Trevi" } } },
     ] as { title: { en: string; it: string }; body: { en: string; it: string }; distance: { en: string; it: string }; image: Img }[],
   },
   faq: {

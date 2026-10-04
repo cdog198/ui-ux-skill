@@ -65,7 +65,7 @@ export const restaurant = {
     },
     cta: { en: "Book a table", it: "Prenota un tavolo" },
     secondary: { en: "See the menu", it: "Guarda il menu" },
-    image: { src: unsplash("1473093295043-cdd812d0e601"), alt: { en: "A plate of fresh pasta with tomato and basil", it: "Un piatto di pasta fresca con pomodoro e basilico" } } as Img,
+    image: { src: unsplash("1473093295043-cdd812d0e601"), alt: { en: "A bowl of farfalle with tomatoes and pesto", it: "Un piatto di farfalle con pomodorini e pesto" } } as Img,
   },
   specials: {
     title: { en: "This week at Alba", it: "Questa settimana da Alba" },
@@ -205,9 +205,9 @@ export const restaurant = {
       { src: unsplash("1517248135467-4c7edcad34c4"), alt: { en: "The dining room in the evening", it: "La sala la sera" } },
       { src: unsplash("1565299624946-b28f40a0ae38"), alt: { en: "A pizza fresh from the oven", it: "Una pizza appena sfornata" } },
       { src: unsplash("1414235077428-338989a2e8c0"), alt: { en: "A table set for dinner", it: "Un tavolo apparecchiato per la cena" } },
-      { src: unsplash("1504674900247-0877df9cc836"), alt: { en: "A plated main course", it: "Un secondo impiattato" } },
+      { src: unsplash("1504674900247-0877df9cc836"), alt: { en: "Plates of grilled meat and salads to share", it: "Piatti di carne alla griglia e insalate da condividere" } },
       { src: unsplash("1510812431401-41d2bd2722f3"), alt: { en: "Glasses of red wine", it: "Calici di vino rosso" } },
-      { src: unsplash("1555396273-367ea4eb4db5"), alt: { en: "Outdoor tables on the street", it: "Tavoli all'aperto sulla strada" } },
+      { src: unsplash("1555396273-367ea4eb4db5"), alt: { en: "The bar and back dining room", it: "Il bancone e la sala sul retro" } },
     ] as Img[],
   },
   reviews: {

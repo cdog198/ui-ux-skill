@@ -13,7 +13,7 @@ export function About() {
     <Section id="about" title={t.about.title} tone="paper-2" layout="split">
       <div className="grid gap-10 md:grid-cols-[minmax(0,15rem)_1fr] md:items-start">
         {/* Set site.owner.photo in src/config/site.ts */}
-        <div className="relative aspect-[4/5] w-full max-w-60 overflow-hidden rounded-md [--ph-bg:#dfe3db]">
+        <div className="relative aspect-[4/5] w-full max-w-60 overflow-hidden rounded-2xl [--ph-bg:#dfe3db]">
           <Photo src={site.owner.photo} alt={fill(t.about.photoAlt, { name })} label={t.about.photoPlaceholder} sizes="15rem" />
         </div>
         <div className="max-w-[62ch] space-y-5 text-lg leading-relaxed">

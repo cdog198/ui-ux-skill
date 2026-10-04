@@ -14,27 +14,27 @@ export function Pricing() {
 
   return (
     <Section id="pricing" title={t.pricing.title} intro={t.pricing.intro}>
-      <div className="on-green grid gap-10 rounded-md bg-green p-7 text-paper sm:p-10 lg:grid-cols-12 lg:gap-12">
+      <div className="grid gap-10 rounded-[28px] bg-sky p-7 sm:p-12 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
           <p className="flex items-end gap-3">
-            <span className="display text-[clamp(6rem,14vw,9rem)]">{formatEuro(pricing.monthly, lang)}</span>
-            <span className="pb-2 text-lg text-green-soft">
+            <span className="headline text-[clamp(5.5rem,12vw,9rem)]">{formatEuro(pricing.monthly, lang)}</span>
+            <span className="pb-2 text-lg text-muted">
               {t.pricing.perMonth}
               <br />
               {t.pricing.vat}
             </span>
           </p>
-          <p className="mt-5 text-lg leading-relaxed text-green-soft">{t.pricing.summary}</p>
+          <p className="mt-5 text-lg leading-relaxed text-muted">{t.pricing.summary}</p>
           <a href="#contact" className={`${btn.primary} mt-7 min-h-13 px-7 text-lg`}>
             {t.pricing.cta}
           </a>
         </div>
         <div className="lg:col-span-7">
-          <h3 className="text-lg font-bold">{t.pricing.includesTitle}</h3>
+          <h3 className="text-lg font-semibold">{t.pricing.includesTitle}</h3>
           <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
             {pricing.includes.map((item) => (
               <li key={item.en} className="flex gap-2.5">
-                <Check aria-hidden className="mt-1 size-4 shrink-0 text-ochre" strokeWidth={3} />
+                <Check aria-hidden className="mt-1 size-4 shrink-0 text-cobalt" strokeWidth={3} />
                 <span>{tr(item)}</span>
               </li>
             ))}
@@ -43,7 +43,7 @@ export function Pricing() {
       </div>
 
       <div className="mt-10 max-w-[64ch]">
-        <h3 className="text-xl font-bold">{fill(t.pricing.termTitle, { months })}</h3>
+        <h3 className="text-xl font-semibold">{fill(t.pricing.termTitle, { months })}</h3>
         <p className="mt-2 text-lg leading-relaxed text-muted">{fill(t.pricing.termBody, { months })}</p>
       </div>
 
@@ -70,7 +70,7 @@ function Comparison() {
 
   return (
     <div className="mt-20">
-      <h3 className="heading text-[clamp(1.6rem,3vw,2.25rem)]">{t.pricing.compareTitle}</h3>
+      <h3 className="heading text-[clamp(1.8rem,3.4vw,2.75rem)]">{t.pricing.compareTitle}</h3>
       <p className="mt-2 text-lg text-muted">{t.pricing.compareIntro}</p>
 
       <div className="mt-8 grid items-start gap-6 md:grid-cols-2 lg:gap-10">

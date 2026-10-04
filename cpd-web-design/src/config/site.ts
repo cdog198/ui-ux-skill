@@ -106,7 +106,7 @@ export const portfolio: PortfolioItem[] = [
       it: "Sito per studio creativo con griglia su misura e hosting statico veloce.",
     },
     image: null, // add a screenshot: "/images/work/sevenhalflab.jpg"
-    cover: { bg: "#10281F", fg: "#F0B23E" },
+    cover: { bg: "#2340D9", fg: "#FFFFFF" },
     featured: true,
   },
   {
@@ -115,7 +115,7 @@ export const portfolio: PortfolioItem[] = [
     year: "Demo",
     category: { en: "Restaurant · example site", it: "Ristorante · sito di esempio" },
     description: { en: "Menu, bookings, live opening hours, bilingual.", it: "Menu, prenotazioni, orari in tempo reale, bilingue." },
-    image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601",
+    image: "/images/work/restaurant.jpg",
     cover: { bg: "#2F3A1F", fg: "#F5EEDD" },
   },
   {
@@ -124,7 +124,7 @@ export const portfolio: PortfolioItem[] = [
     year: "Demo",
     category: { en: "Boutique hotel · example site", it: "Hotel boutique · sito di esempio" },
     description: { en: "Availability search, room carousels, booking requests.", it: "Ricerca disponibilità, camere, richieste di prenotazione." },
-    image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39",
+    image: "/images/work/hotel.jpg",
     cover: { bg: "#14202B", fg: "#C9A66B" },
   },
   // Add real projects here. Copy this shape:

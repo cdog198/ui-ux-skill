@@ -7,7 +7,7 @@ import { useT } from "@/lib/i18n";
 import { btn } from "./Section";
 
 export function Logo() {
-  return <span className="heading text-xl whitespace-nowrap">CPD Web Design</span>;
+  return <span className="text-lg font-semibold tracking-tight whitespace-nowrap">CPD Web Design</span>;
 }
 
 export function Header() {
@@ -39,8 +39,8 @@ export function Header() {
       <a href="#main" className="sr-only rounded bg-ink px-4 py-2 text-paper focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100]">
         {t.nav.skip}
       </a>
-      <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
+      <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur">
+        <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-5 sm:px-8">
           <Link href="/" aria-label="CPD Web Design, home">
             <Logo />
           </Link>
@@ -69,7 +69,7 @@ export function Header() {
               onClick={() => setOpen(true)}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="inline-flex min-h-10 items-center rounded-[4px] border border-ink px-3 text-sm font-semibold lg:hidden"
+              className="inline-flex min-h-10 items-center rounded-full border border-ink/20 px-4 text-sm font-medium lg:hidden"
             >
               {t.nav.menu}
             </button>
@@ -81,7 +81,7 @@ export function Header() {
         <div id="mobile-menu" role="dialog" aria-modal="true" aria-label={t.nav.menu} className="fixed inset-0 z-[60] flex flex-col bg-paper px-5 sm:px-8">
           <div className="flex h-16 items-center justify-between border-b border-line">
             <Logo />
-            <button type="button" autoFocus onClick={() => setOpen(false)} className="inline-flex min-h-10 items-center rounded-[4px] border border-ink px-3 text-sm font-semibold">
+            <button type="button" autoFocus onClick={() => setOpen(false)} className="inline-flex min-h-10 items-center rounded-full border border-ink/20 px-4 text-sm font-medium">
               {t.nav.close}
             </button>
           </div>
@@ -89,7 +89,7 @@ export function Header() {
             <ul>
               {links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} onClick={() => setOpen(false)} className="heading block py-3 text-3xl">
+                  <Link href={l.href} onClick={() => setOpen(false)} className="heading block py-3 text-4xl">
                     {l.label}
                   </Link>
                 </li>

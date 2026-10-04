@@ -85,31 +85,31 @@ export function Contact() {
 
 
   const input =
-    "mt-1.5 block w-full min-h-12 rounded-[4px] border border-ink/30 bg-white px-3.5 text-ink placeholder:text-muted/80 focus:border-ink focus:outline-2 focus:outline-offset-0 focus:outline-ink";
+    "mt-1.5 block w-full min-h-12 rounded-xl border border-ink/20 bg-white px-4 text-ink placeholder:text-muted/80 focus:border-cobalt focus:outline-2 focus:outline-offset-0 focus:outline-cobalt";
 
   return (
-    <Section id="contact" title={t.contact.title} intro={t.contact.intro} tone="green">
+    <Section id="contact" title={t.contact.title} intro={t.contact.intro} tone="cobalt">
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="space-y-3 lg:col-span-4">
-          <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className={`${btn.primary} w-full gap-2.5`}>
+          <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className={`${btn.onCobalt} w-full gap-2.5`}>
             <MessageCircle aria-hidden className="size-5" />
             {t.contact.whatsapp}
           </a>
-          <a href={`mailto:${contact.email}`} className={`${btn.secondaryOnGreen} w-full gap-2.5`}>
+          <a href={`mailto:${contact.email}`} className="inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full border border-white/60 px-6 font-medium text-white transition-colors hover:bg-white hover:text-cobalt">
             <Mail aria-hidden className="size-5 shrink-0" />
             <span className="truncate">{contact.email}</span>
           </a>
         </div>
 
-        <div className="rounded-md bg-paper p-6 text-ink sm:p-8 lg:col-span-8">
+        <div className="rounded-[24px] bg-white p-6 text-ink sm:p-10 lg:col-span-8">
           {status === "success" ? (
             <div role="status">
-              <p className="heading text-3xl">{f.successTitle}</p>
+              <p className="heading text-4xl">{f.successTitle}</p>
               <p className="mt-2 text-lg text-muted">{f.successBody}</p>
             </div>
           ) : (
             <form onSubmit={onSubmit} noValidate className="grid gap-5 sm:grid-cols-2">
-              <p className="font-semibold sm:col-span-2">{t.contact.or}</p>
+              <p className="font-medium sm:col-span-2">{t.contact.or}</p>
               <Field id="contact-name" label={f.name} error={errors.name}>
                 <input id="contact-name" name="name" autoComplete="name" required value={fields.name} onChange={(e) => set("name", e.target.value)} aria-invalid={!!errors.name} aria-describedby={errors.name ? "contact-name-error" : undefined} className={input} />
               </Field>
@@ -133,7 +133,7 @@ export function Contact() {
 
               <div className="sm:col-span-2">
                 <label className="flex cursor-pointer items-start gap-3 text-muted">
-                  <input id="contact-consent" type="checkbox" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} aria-invalid={!!errors.consent} aria-describedby={errors.consent ? "contact-consent-error" : undefined} className="mt-1 size-4 shrink-0 accent-[var(--color-green)]" />
+                  <input id="contact-consent" type="checkbox" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} aria-invalid={!!errors.consent} aria-describedby={errors.consent ? "contact-consent-error" : undefined} className="mt-1 size-4 shrink-0 accent-[var(--color-cobalt)]" />
                   <span>
                     {f.consent}{" "}
                     <Link href="/privacy" className="text-ink underline underline-offset-4">
@@ -170,7 +170,7 @@ export function Contact() {
 function Field({ id, label, error, className = "", children }: { id: string; label: string; error?: string; className?: string; children: React.ReactNode }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="text-sm font-semibold">
+      <label htmlFor={id} className="text-sm font-medium">
         {label}
       </label>
       {children}

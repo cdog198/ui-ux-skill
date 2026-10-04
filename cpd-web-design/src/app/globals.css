@@ -2,21 +2,22 @@
 
 /*
  * CPD design tokens
- * Roman shutter green + plaster ochre on thermal-receipt white.
- * Boldness is spent on the hero receipt; everything else stays quiet.
+ * White page, large regular-weight type, plenty of space. A little colour:
+ * Roman-sky blue for big panels, cobalt for actions, a touch of sun yellow.
  */
 @theme {
-  --color-paper: #fafaf7; /* thermal receipt paper */
-  --color-paper-2: #eef0ea;
-  --color-ink: #10281f; /* text: 14.9:1 on paper */
-  --color-muted: #4d5e56; /* 6.6:1 on paper */
-  --color-green: #1f4d3b; /* shutter green: paper text on it 9.2:1 */
-  --color-green-soft: #c9d6cf; /* body text on green: 6.4:1 */
-  --color-ochre: #f0b23e; /* fills only; ink text on it 8.3:1 */
+  --color-paper: #ffffff;
+  --color-paper-2: #f2f3f5; /* quiet section background */
+  --color-ink: #000000;
+  --color-muted: #5c6066; /* 6.3:1 on white, 5.1:1 on sky */
+  --color-sky: #dce8f7; /* big panels */
+  --color-cobalt: #2340d9; /* buttons, links, contact section: white text 7.5:1 */
+  --color-cobalt-soft: #d5ddf7; /* body text on cobalt: 5.5:1 */
+  --color-sun: #ffc94d; /* small highlights only */
   --color-stripe: #d9346b; /* end-of-roll stripe on receipts, decoration only */
-  --color-line: #10281f26;
+  --color-line: #00000018;
 
-  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-sans: var(--font-schibsted), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
@@ -33,22 +34,18 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Condensed capitals: hero headline and prices only. */
-.display {
-  font-weight: 800;
-  font-stretch: 62%;
-  font-variation-settings: "wdth" 62;
-  text-transform: uppercase;
-  line-height: 0.88;
+/* Large headlines: regular weight, tight spacing. */
+.headline {
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
 }
 
-/* Section headings: slightly condensed, sentence case. */
+/* Section headings. */
 .heading {
-  font-weight: 750;
-  font-stretch: 82%;
-  font-variation-settings: "wdth" 82;
-  line-height: 1.02;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
 /* Receipt paper with a torn, zig-zag bottom edge. */
@@ -66,13 +63,13 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-ink);
+  outline: 3px solid var(--color-cobalt);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
-.on-green :focus-visible {
-  outline-color: var(--color-ochre);
+.on-cobalt :focus-visible {
+  outline-color: var(--color-sun);
 }
 
 details > summary {

@@ -16,7 +16,7 @@ export function LangToggle({
 }) {
   const { lang, setLang } = useLang();
   return (
-    <div role="group" aria-label={label} className={`inline-flex items-center rounded-[4px] border border-current p-0.5 text-xs font-semibold ${className}`}>
+    <div role="group" aria-label={label} className={`inline-flex items-center rounded-full border border-current/25 p-0.5 text-xs font-semibold ${className}`}>
       {LANGS.map((code) => (
         <button
           key={code}
@@ -24,7 +24,7 @@ export function LangToggle({
           onClick={() => setLang(code)}
           aria-pressed={lang === code}
           lang={code}
-          className={`min-h-9 min-w-10 cursor-pointer rounded-[3px] px-2.5 uppercase transition-colors ${lang === code ? activeClassName : inactiveClassName}`}
+          className={`min-h-9 min-w-10 cursor-pointer rounded-full px-2.5 uppercase transition-colors ${lang === code ? activeClassName : inactiveClassName}`}
         >
           {code}
         </button>
