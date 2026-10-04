@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Schibsted_Grotesk } from "next/font/google";
 import { Providers } from "@/components/ui/Providers";
-import { contact, pricing, site } from "@/config/site";
+import { contact, lowestMonthly, pricing, site } from "@/config/site";
 import { translations } from "@/content/translations";
 import "./globals.css";
 
@@ -55,7 +55,7 @@ const jsonLd = {
   email: contact.email,
   telephone: contact.phoneDisplay,
   image: `${site.url}/opengraph-image`,
-  priceRange: `€${pricing.monthly}/month`,
+  priceRange: `€${lowestMonthly}–€${Math.max(...pricing.plans.map((p) => p.monthly))}/month`,
   address: {
     "@type": "PostalAddress",
     addressLocality: site.address.locality,
@@ -65,17 +65,17 @@ const jsonLd = {
   },
   areaServed: [{ "@type": "City", name: "Rome" }, { "@type": "Country", name: "Italy" }],
   knowsLanguage: ["en", "it"],
-  makesOffer: {
+  makesOffer: pricing.plans.map((plan) => ({
     "@type": "Offer",
-    name: "Website design, build and care",
-    description: "Website designed and built for free, with hosting, updates, changes and support for a flat monthly fee.",
+    name: `${plan.name.en} website plan`,
+    description: plan.audience.en,
     priceSpecification: {
       "@type": "UnitPriceSpecification",
-      price: pricing.monthly,
+      price: plan.monthly,
       priceCurrency: "EUR",
       unitCode: "MON",
     },
-  },
+  })),
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

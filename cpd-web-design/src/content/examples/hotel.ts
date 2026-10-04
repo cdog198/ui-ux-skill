@@ -24,6 +24,9 @@ export const hotelMeta: ExampleMeta = {
   industry: { en: "Boutique hotel", it: "Hotel boutique" },
   tagline: { en: "Twelve rooms in a 16th-century palazzo", it: "Dodici camere in un palazzo del Cinquecento" },
   location: "Centro Storico, Roma",
+  plan: "business",
+  domain: "hotelviagiulia.it",
+  screenshot: "/images/work/hotel.jpg",
   cover: unsplash("1590490360182-c33d57733427"),
   palette: { bg: "#14202B", fg: "#EDE7DC", accent: "#C9A66B" },
   features: [

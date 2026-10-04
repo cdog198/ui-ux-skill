@@ -1,45 +1,21 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { pricing } from "@/config/site";
+import { planById, pricing, type Plan } from "@/config/site";
 import { fill, formatEuro, useL, useLang, useT } from "@/lib/i18n";
 import { Section, btn } from "./Section";
 
-/** One plan, one price. Values come from src/config/site.ts → pricing. */
+/** Plans come from src/config/site.ts → pricing.plans. */
 export function Pricing() {
   const t = useT();
-  const tr = useL();
-  const { lang } = useLang();
   const months = pricing.minimumTermMonths;
 
   return (
     <Section id="pricing" title={t.pricing.title} intro={t.pricing.intro}>
-      <div className="grid gap-10 rounded-[28px] bg-sky p-7 sm:p-12 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-5">
-          <p className="flex items-end gap-3">
-            <span className="headline text-[clamp(5.5rem,12vw,9rem)]">{formatEuro(pricing.monthly, lang)}</span>
-            <span className="pb-2 text-lg text-muted">
-              {t.pricing.perMonth}
-              <br />
-              {t.pricing.vat}
-            </span>
-          </p>
-          <p className="mt-5 text-lg leading-relaxed text-muted">{t.pricing.summary}</p>
-          <a href="#contact" className={`${btn.primary} mt-7 min-h-13 px-7 text-lg`}>
-            {t.pricing.cta}
-          </a>
-        </div>
-        <div className="lg:col-span-7">
-          <h3 className="text-lg font-semibold">{t.pricing.includesTitle}</h3>
-          <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
-            {pricing.includes.map((item) => (
-              <li key={item.en} className="flex gap-2.5">
-                <Check aria-hidden className="mt-1 size-4 shrink-0 text-cobalt" strokeWidth={3} />
-                <span>{tr(item)}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="grid gap-5 lg:grid-cols-2">
+        {pricing.plans.map((plan) => (
+          <PlanCard key={plan.id} plan={plan} />
+        ))}
       </div>
 
       <div className="mt-10 max-w-[64ch]">
@@ -52,12 +28,46 @@ export function Pricing() {
   );
 }
 
-/** Two printed receipts side by side: typical agency vs CPD, first year. */
+function PlanCard({ plan }: { plan: Plan }) {
+  const t = useT();
+  const tr = useL();
+  const { lang } = useLang();
+  return (
+    <div className={`flex flex-col rounded-[28px] p-7 sm:p-10 ${plan.featured ? "bg-sky" : "border border-ink/15"}`}>
+      <h3 className="text-2xl font-semibold">{tr(plan.name)}</h3>
+      <p className="mt-1 text-muted">{tr(plan.audience)}</p>
+      <p className="mt-6 flex items-end gap-3">
+        <span className="headline text-[clamp(4.5rem,9vw,7rem)]">{formatEuro(plan.monthly, lang)}</span>
+        <span className="pb-2 text-muted">
+          {t.pricing.perMonth}
+          <br />
+          {t.pricing.vat}
+        </span>
+      </p>
+      <p className="mt-2 text-sm text-muted">{t.pricing.free}</p>
+      <ul className="mt-6 flex-1 space-y-2.5">
+        {plan.includes.map((item) => (
+          <li key={item.en} className="flex gap-2.5">
+            <Check aria-hidden className="mt-1 size-4 shrink-0 text-cobalt" strokeWidth={3} />
+            <span>{tr(item)}</span>
+          </li>
+        ))}
+      </ul>
+      <a href="#contact" className={`mt-8 self-start ${plan.featured ? btn.primary : btn.secondary}`}>
+        {fill(t.pricing.choose, { name: tr(plan.name) })}
+      </a>
+    </div>
+  );
+}
+
+/** Two printed receipts side by side: typical agency vs CPD (Business plan), first year. */
 function Comparison() {
   const t = useT();
+  const tr = useL();
   const { lang } = useLang();
   const eur = (n: number) => formatEuro(n, lang);
   const a = pricing.agency;
+  const business = planById("business");
   const ongoing = (a.hostingMonthly + a.maintenanceMonthly) * 12;
 
   const rows: [string, string, string][] = [
@@ -80,7 +90,7 @@ function Comparison() {
           due={`${eur(a.buildMin)}–${eur(a.buildMax)}`}
           year={`${eur(a.buildMin + ongoing)}–${eur(a.buildMax + ongoing)}`}
         />
-        <ReceiptCard title={t.pricing.you} rows={rows.map(([l, , v]) => [l, v])} due={eur(0)} year={eur(pricing.monthly * 12)} ours />
+        <ReceiptCard title={`${t.pricing.you} · ${tr(business.name)}`} rows={rows.map(([l, , v]) => [l, v])} due={eur(0)} year={eur(business.monthly * 12)} ours />
       </div>
       <p className="mt-5 text-sm text-muted">{t.pricing.basedOn}</p>
     </div>

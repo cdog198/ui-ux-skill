@@ -22,6 +22,9 @@ export const restaurantMeta: ExampleMeta = {
   industry: { en: "Restaurant", it: "Ristorante" },
   tagline: { en: "A family trattoria in Testaccio", it: "Una trattoria di famiglia a Testaccio" },
   location: "Testaccio, Roma",
+  plan: "business",
+  domain: "trattoria-alba.it",
+  screenshot: "/images/work/restaurant.jpg",
   cover: unsplash("1473093295043-cdd812d0e601"),
   palette: { bg: "#F5EEDD", fg: "#2F3A1F", accent: "#A64B25" },
   features: [

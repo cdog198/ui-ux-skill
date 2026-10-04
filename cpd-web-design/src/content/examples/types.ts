@@ -1,3 +1,4 @@
+import type { PlanId } from "@/config/site";
 import type { L } from "@/lib/i18n";
 
 /**
@@ -17,6 +18,12 @@ export type ExampleMeta = {
   industry: L;
   tagline: L;
   location: string;
+  /** Which plan this example is built on. */
+  plan: PlanId;
+  /** Web address shown in browser frames (display only). */
+  domain: string;
+  /** Screenshot of the demo used on the home page (public/images/work/). */
+  screenshot: string;
   /** Cover image for cards (remote Unsplash URL or /public path). */
   cover: string;
   palette: { bg: string; fg: string; accent: string };

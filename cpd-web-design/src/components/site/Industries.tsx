@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import Link from "next/link";
 import { useId, useState } from "react";
 import { Photo } from "@/components/ui/Photo";
-import { pricing } from "@/config/site";
+import { planById } from "@/config/site";
 import { examples } from "@/content/examples";
 import { fill, formatEuro, useL, useLang, useT } from "@/lib/i18n";
 import { Section, btn } from "./Section";
@@ -26,8 +26,8 @@ export function Industries() {
   };
 
   return (
-    <Section id="industries" tone="paper-2" title={t.industries.title} intro={fill(t.industries.intro, { price: `${formatEuro(pricing.monthly, lang)}${t.pricing.perMonth}` })}>
-      <div role="tablist" aria-label={t.industries.title} className="inline-flex rounded-full border border-ink/20 p-1" onKeyDown={onKeyDown}>
+    <Section id="industries" tone="paper-2" title={t.industries.title} intro={t.industries.intro}>
+      <div role="tablist" aria-label={t.industries.title} className="inline-flex flex-wrap gap-1 rounded-[24px] border border-ink/20 p-1" onKeyDown={onKeyDown}>
         {examples.map((x, i) => (
           <button
             key={x.slug}
@@ -52,6 +52,10 @@ export function Industries() {
           </div>
           <p className="mt-4 text-xl font-semibold">{ex.name}</p>
           <p className="text-muted">{tr(ex.tagline)}</p>
+          <p className="mt-2 inline-flex rounded-full bg-sky px-3 py-1 text-sm font-medium">
+            {tr(planById(ex.plan).name)} · {formatEuro(planById(ex.plan).monthly, lang)}
+            {t.pricing.perMonth}
+          </p>
           <Link href={`/examples/${ex.slug}`} className={`${btn.secondary} mt-5`}>
             {fill(t.industries.demo, { name: ex.name })}
           </Link>

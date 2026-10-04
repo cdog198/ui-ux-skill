@@ -31,29 +31,10 @@ const en = {
   hero: {
     titleA: "Your website,",
     titleB: "built free.",
-    sub: "You just pay to keep it running.",
-    body: "I'm a web designer in Rome. I'll design and build a website for your business with nothing to pay up front. After that it's a flat monthly fee, and I host it, keep it secure and make changes whenever you ask.",
+    sub: "You just pay to keep it running, from {price} a month.",
     cta: "Get your free site",
     secondary: "See example sites",
-  },
-  receipt: {
-    doc: "DOCUMENTO COMMERCIALE",
-    docSub: "di vendita o prestazione",
-    description: "DESCRIPTION",
-    price: "PRICE (€)",
-    lines: [
-      ["Website design", "0,00"],
-      ["Development", "0,00"],
-      ["Setup and launch", "0,00"],
-      ["Help with text and photos", "0,00"],
-    ],
-    total: "TOTAL",
-    vat: "of which VAT",
-    payment: "Payment",
-    paymentValue: "none",
-    then: "Then each month",
-    from: "{price}",
-    covers: "hosting, SSL, backups, changes, support",
+    showcase: "Example sites, with the plan each one is on",
   },
   how: {
     title: "How it works",
@@ -80,12 +61,11 @@ const en = {
   },
   pricing: {
     title: "Prices",
-    intro: "One plan, one price. The design and build are free; the monthly fee covers everything after that.",
+    intro: "Two plans. The design and build are free on both; the monthly fee covers everything after that.",
     perMonth: "/month",
     vat: "+ VAT",
-    summary: "That's the whole price. No setup fee, no design fee, and no extra charges for hosting, updates or small changes.",
-    cta: "Get your free site",
-    includesTitle: "What's included",
+    free: "€0 to design and build.",
+    choose: "Choose {name}",
     termTitle: "There's a {months}-month minimum term.",
     termBody:
       "That's how the design and build get paid for without an upfront fee. After {months} months it's month to month, and you can cancel with 30 days' notice.",
@@ -105,7 +85,7 @@ const en = {
     perMonthShort: "/mo",
     billed: "by the hour",
     included: "included",
-    basedOn: "Agency figures are typical for small Italian businesses.",
+    basedOn: "Compared with the Business plan. Agency figures are typical for small Italian businesses.",
   },
   catch: {
     title: "What's the catch?",
@@ -125,14 +105,14 @@ const en = {
     ],
   },
   industries: {
-    title: "What you get for a restaurant or a hotel",
-    intro: "Every feature below is included in the {price} plan, and each one works in the example sites.",
+    title: "What each example includes",
+    intro: "Every feature below works in the example site. Each example shows which plan it's built on.",
     demo: "Open the {name} example",
     note: "Need something that isn't listed? Ask and I'll tell you whether it's included or what it would cost.",
   },
   work: {
     title: "Recent work",
-    intro: "Two of these are example sites I built to show what a restaurant or a hotel would get.",
+    intro: "A real client site, plus example sites I built to show what different kinds of business would get.",
     visit: "Visit site",
     view: "Open example",
     soon: "Case study coming soon",
@@ -140,9 +120,9 @@ const en = {
   examples: {
     title: "Example sites",
     intro:
-      "Complete, working websites for two made-up businesses in Rome, built the way I'd build yours. Try the language switch and the booking forms, and turn on Features to see what each part is for.",
+      "Complete, working websites for made-up businesses in Rome, built the way I'd build yours. Try the language switch and the booking forms, and turn on Features to see what each part is for.",
     open: "Open example",
-    more: "Salon, gym and shop examples are on the way. If you run one, I'd like to hear from you.",
+    more: "Don't see your kind of business? I build sites for almost any local business: shops, B&Bs, dentists, architects, mechanics.",
     ask: "Get in touch",
   },
   faq: {
@@ -170,11 +150,15 @@ const en = {
       },
       {
         q: "Do you build sites in Italian?",
-        a: "Yes. I work in English and Italian, and every site can have both, with a language switch like the one on this site. It's included in the price.",
+        a: "Yes. I work in English and Italian, and every site can have both, with a language switch like the one on this site. It's included in the Business plan.",
       },
       {
         q: "What counts as a small change?",
-        a: "Anything that takes up to about 30 minutes: changing text, prices or opening hours, swapping photos, adding a dish or an event. Up to three a month are included. New pages and new features are quoted separately.",
+        a: "Anything that takes up to about 30 minutes: changing text, prices or opening hours, swapping photos, adding a dish or an event. The One page plan includes one a month and the Business plan three. New pages and new features are quoted separately.",
+      },
+      {
+        q: "Which plan do I need?",
+        a: "If you need a single page that says who you are and how to reach you, such as a portfolio, CV, event or small side project, One page is enough. If you're a business that needs a menu, bookings, several pages or two languages, choose Business. You can move up at any time.",
       },
       {
         q: "Is anything not included?",
@@ -259,29 +243,10 @@ const it: Dict = {
   hero: {
     titleA: "Il tuo sito,",
     titleB: "fatto gratis.",
-    sub: "Paghi solo per tenerlo attivo.",
-    body: "Sono un web designer a Roma. Progetto e realizzo il sito della tua attività senza farti pagare nulla all'inizio. Poi c'è un canone mensile fisso: io lo ospito, lo tengo sicuro e faccio le modifiche quando me le chiedi.",
+    sub: "Paghi solo per tenerlo attivo, da {price} al mese.",
     cta: "Il tuo sito gratis",
     secondary: "Guarda i siti di esempio",
-  },
-  receipt: {
-    doc: "DOCUMENTO COMMERCIALE",
-    docSub: "di vendita o prestazione",
-    description: "DESCRIZIONE",
-    price: "PREZZO (€)",
-    lines: [
-      ["Design del sito", "0,00"],
-      ["Sviluppo", "0,00"],
-      ["Attivazione e lancio", "0,00"],
-      ["Aiuto con testi e foto", "0,00"],
-    ],
-    total: "TOTALE COMPLESSIVO",
-    vat: "di cui IVA",
-    payment: "Pagamento",
-    paymentValue: "nessuno",
-    then: "Poi ogni mese",
-    from: "{price}",
-    covers: "hosting, SSL, backup, modifiche, assistenza",
+    showcase: "Siti di esempio, con il piano di ciascuno",
   },
   how: {
     title: "Come funziona",
@@ -308,12 +273,11 @@ const it: Dict = {
   },
   pricing: {
     title: "Prezzi",
-    intro: "Un solo piano, un solo prezzo. Design e sviluppo sono gratis; il canone mensile copre tutto il resto.",
+    intro: "Due piani. Design e sviluppo sono gratis in entrambi; il canone mensile copre tutto il resto.",
     perMonth: "/mese",
     vat: "+ IVA",
-    summary: "È il prezzo completo. Nessun costo di attivazione, nessun costo di design e nessun extra per hosting, aggiornamenti o piccole modifiche.",
-    cta: "Il tuo sito gratis",
-    includesTitle: "Cosa è incluso",
+    free: "€0 per design e sviluppo.",
+    choose: "Scegli {name}",
     termTitle: "La durata minima è di {months} mesi.",
     termBody:
       "È così che design e sviluppo vengono pagati senza un costo iniziale. Dopo {months} mesi si va mese per mese, e puoi disdire con 30 giorni di preavviso.",
@@ -333,7 +297,7 @@ const it: Dict = {
     perMonthShort: "/mese",
     billed: "a ore",
     included: "incluso",
-    basedOn: "Le cifre dell'agenzia sono tipiche per le piccole attività italiane.",
+    basedOn: "Confronto con il piano Business. Le cifre dell'agenzia sono tipiche per le piccole attività italiane.",
   },
   catch: {
     title: "Dov'è la fregatura?",
@@ -353,14 +317,14 @@ const it: Dict = {
     ],
   },
   industries: {
-    title: "Cosa ottieni per un ristorante o un hotel",
-    intro: "Tutte le funzioni qui sotto sono incluse nel piano da {price} e sono attive nei siti di esempio.",
+    title: "Cosa include ogni esempio",
+    intro: "Tutte le funzioni qui sotto sono attive nel sito di esempio. Per ogni esempio è indicato il piano su cui è costruito.",
     demo: "Apri l'esempio {name}",
     note: "Ti serve qualcosa che non è in elenco? Chiedimelo e ti dico se è incluso o quanto costerebbe.",
   },
   work: {
     title: "Lavori recenti",
-    intro: "Due di questi sono siti di esempio che ho realizzato per mostrare cosa avrebbe un ristorante o un hotel.",
+    intro: "Un sito reale per un cliente, più alcuni siti di esempio che ho realizzato per mostrare cosa otterrebbero diversi tipi di attività.",
     visit: "Visita il sito",
     view: "Apri l'esempio",
     soon: "Case study in arrivo",
@@ -368,9 +332,9 @@ const it: Dict = {
   examples: {
     title: "Siti di esempio",
     intro:
-      "Siti completi e funzionanti per due attività immaginarie a Roma, realizzati come realizzerei il tuo. Prova il cambio lingua e i moduli di prenotazione, e attiva Funzioni per vedere a cosa serve ogni parte.",
+      "Siti completi e funzionanti per attività immaginarie a Roma, realizzati come realizzerei il tuo. Prova il cambio lingua e i moduli di prenotazione, e attiva Funzioni per vedere a cosa serve ogni parte.",
     open: "Apri l'esempio",
-    more: "Stanno arrivando esempi per saloni, palestre e negozi. Se ne gestisci uno, scrivimi.",
+    more: "Non vedi il tuo tipo di attività? Realizzo siti per quasi ogni attività locale: negozi, B&B, dentisti, architetti, officine.",
     ask: "Contattami",
   },
   faq: {
@@ -398,11 +362,15 @@ const it: Dict = {
       },
       {
         q: "Fai siti in italiano?",
-        a: "Sì. Lavoro in italiano e in inglese, e ogni sito può averle entrambe, con un cambio lingua come quello di questo sito. È incluso nel prezzo.",
+        a: "Sì. Lavoro in italiano e in inglese, e ogni sito può averle entrambe, con un cambio lingua come quello di questo sito. È incluso nel piano Business.",
       },
       {
         q: "Cosa si intende per piccola modifica?",
-        a: "Tutto ciò che richiede fino a circa 30 minuti: cambiare testi, prezzi o orari, sostituire foto, aggiungere un piatto o un evento. Ne sono incluse fino a tre al mese. Nuove pagine e nuove funzioni si preventivano a parte.",
+        a: "Tutto ciò che richiede fino a circa 30 minuti: cambiare testi, prezzi o orari, sostituire foto, aggiungere un piatto o un evento. Il piano Una pagina ne include una al mese, il piano Business tre. Nuove pagine e nuove funzioni si preventivano a parte.",
+      },
+      {
+        q: "Di quale piano ho bisogno?",
+        a: "Se ti serve una sola pagina che dica chi sei e come contattarti, come un portfolio, un CV, un evento o un piccolo progetto, basta Una pagina. Se sei un'attività e ti servono menu, prenotazioni, più pagine o due lingue, scegli Business. Puoi passare al piano superiore quando vuoi.",
       },
       {
         q: "C'è qualcosa che non è incluso?",

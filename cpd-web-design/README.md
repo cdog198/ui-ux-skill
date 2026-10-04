@@ -16,13 +16,13 @@ npm run lint
 
 | What | File |
 | --- | --- |
-| **Price (€79/month), what's included, minimum term, buy-out fee, agency comparison** | `src/config/site.ts` → `pricing` |
+| **Plans (€19 One page, €79 Business), what each includes, minimum term, buy-out fee, agency comparison** | `src/config/site.ts` → `pricing.plans` |
 | Contact details (email, WhatsApp, phone, VAT no., your name/photo) | `src/config/site.ts` → `site`, `contact` |
 | **Portfolio / recent work** (incl. the sevenhalflab.com slot) | `src/config/site.ts` → `portfolio` |
 | Contact form endpoint (Formspree) | `src/config/site.ts` → `contactForm` or env `NEXT_PUBLIC_FORM_ENDPOINT` |
 | **All page copy, EN + IT** (headlines, FAQ, about text…) | `src/content/translations.ts` |
-| Restaurant demo content (menu, hours, reviews, images) | `src/content/examples/restaurant.ts` |
-| Hotel demo content (rooms, prices, guide, FAQ, images) | `src/content/examples/hotel.ts` |
+| Example sites' content (menus, rooms, prices, timetables, images, which plan each is on) | `src/content/examples/*.ts` (restaurant, hotel, salon, yoga, portfolio) |
+| Example screenshots used in the hero and Work section | `public/images/work/*.jpg` (retake them after changing a demo) |
 | Feature list shown in each demo's overlay and on the home page | `features` in each demo file above |
 | Design tokens (colours, fonts) | `src/app/globals.css` (`@theme`) and `src/app/layout.tsx` |
 
@@ -40,12 +40,13 @@ Placeholders to replace before launch are marked `PLACEHOLDER` in the code (pric
 
 The form sends JSON: `name, business, email, message`, with a `_gotcha` honeypot for spam.
 
-## Adding another industry demo (salon, gym, shop…)
+## Adding another example site (gym, shop, B&B…)
 
-1. Copy `src/content/examples/restaurant.ts` → `salon.ts`; edit content and `salonMeta.features`.
-2. Copy `src/components/examples/restaurant/` → `salon/` and adjust the layout/branding.
-3. Copy `src/app/examples/restaurant/page.tsx` → `src/app/examples/salon/page.tsx` (pick new fonts there).
-4. Add `salonMeta` to `src/content/examples/index.ts`. It then appears in the home page "What you get" table and on `/examples` automatically.
+1. Copy `src/content/examples/salon.ts` → `gym.ts`; edit the content, `gymMeta.features` and `gymMeta.plan`.
+2. Copy `src/components/examples/salon/` → `gym/` and adjust the layout/branding.
+3. Copy `src/app/examples/salon/page.tsx` → `src/app/examples/gym/page.tsx` (pick new fonts there).
+4. Add `gymMeta` to `src/content/examples/index.ts`. It then appears on `/examples` and in the "What each example includes" section.
+5. Save a 1440×900 screenshot as `public/images/work/gym.jpg`, and add it to `ORDER` in `src/components/site/Hero.tsx` if it should appear in the hero.
 
 Each demo wraps its page in `<ExampleChrome>` (floating "Example site by CPD" badge + **Features** overlay) and marks sections with `<FeatureZone id="…">` matching the `features` ids.
 
