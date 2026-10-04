@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* Tokens: see DESIGN_NOTES.md. Orange (settemezzo) is reserved for awards, the logo and focus. */
+@theme {
+  --color-fondale: #0d2230;
+  --color-fondale-2: #122c3d;
+  --color-schermo: #eceee9;
+  --color-nebbia: #8fa3ae;
+  --color-linea: #24404f;
+  --color-settemezzo: #f29100;
+
+  --font-sans: var(--font-archivo), "Arial Narrow", system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+}
+
+html {
+  background: var(--color-fondale);
+  color: var(--color-schermo);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-fondale);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-stretch: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-schermo);
+  color: var(--color-fondale);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-settemezzo);
+  outline-offset: 3px;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* Condensed display type: the billing-block voice. */
+.display {
+  font-stretch: 62%;
+  font-weight: 340;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+}
+.display-xl {
+  font-size: clamp(3.6rem, 14vw, 15rem);
+}
+.display-lg {
+  font-size: clamp(2.8rem, 9vw, 9.5rem);
+}
+.display-md {
+  font-size: clamp(2.2rem, 5.5vw, 5.5rem);
+}
+
+.condensed {
+  font-stretch: 75%;
+}
+
+.wrap {
+  padding-inline: var(--gutter);
+}
+
+.measure {
+  max-width: 64ch;
+}
+
+/* ---------- Reel: a credited loop (mp4) or a slowly drifting still ---------- */
+.reel-media {
+  animation: drift 38s ease-in-out infinite alternate;
+  transform-origin: 60% 50%;
+}
+@keyframes drift {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(-2%, -1%, 0);
+  }
+}
+
+/* ---------- Hero: the one orchestrated moment ---------- */
+.rise {
+  display: block;
+  overflow: hidden;
+}
+.rise > span {
+  display: block;
+  animation: rise 1.1s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+  animation-delay: calc(var(--i, 0) * 120ms + 150ms);
+}
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Poster wall ---------- */
+.poster-caption {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.poster:hover .poster-caption,
+.poster:focus-visible .poster-caption {
+  opacity: 1;
+}
+.poster:hover img,
+.poster:focus-visible img {
+  filter: brightness(0.35);
+}
+.poster img {
+  transition: filter 0.3s ease;
+}
+/* Touch screens can't hover: show the title under the poster instead. */
+@media (hover: none) {
+  .poster-caption {
+    display: none;
+  }
+  .poster-touch {
+    display: block;
+  }
+}
+@media (hover: hover) {
+  .poster-touch {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-media,
+  .rise > span {
+    animation: none;
+  }
+  .poster img,
+  .poster-caption {
+    transition: none;
+  }
+}
