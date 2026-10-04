@@ -67,7 +67,7 @@ export type Plan = {
 
 export const pricing = {
   /** Minimum term in months (both plans). Shown in pricing, FAQ and "What's the catch?". PLACEHOLDER. */
-  minimumTermMonths: 12,
+  minimumTermMonths: 6,
   /** Fee to take full ownership of the design and code if you leave (FAQ). PLACEHOLDER. */
   buyoutFee: 500,
   /** The plans. "What's included" lists are PLACEHOLDERS: edit to match what you offer. */
