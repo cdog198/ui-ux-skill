@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono, Newsreader } from "next/font/google";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import { Providers } from "@/components/ui/Providers";
 import { contact, pricing, site } from "@/config/site";
 import { translations } from "@/content/translations";
@@ -12,21 +12,12 @@ const archivo = Archivo({
   display: "swap",
 });
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  style: ["italic"],
-  weight: ["400"],
-  variable: "--font-newsreader",
-  display: "swap",
-  preload: false, // accent font: let the main font win the bandwidth race
-});
-
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "600"],
   variable: "--font-plex-mono",
   display: "swap",
-  preload: false,
+  preload: false, // only used inside receipts; let Archivo load first
 });
 
 const t = translations.en;
@@ -51,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#15120E",
+  themeColor: "#1F4D3B",
 };
 
 /** Structured data: tells Google this is a local web-design business in Rome. */
@@ -90,7 +81,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${newsreader.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${plexMono.variable}`}>
       <body>
         <script
           type="application/ld+json"

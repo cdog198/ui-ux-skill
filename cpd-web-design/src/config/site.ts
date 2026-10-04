@@ -151,7 +151,7 @@ export const portfolio: PortfolioItem[] = [
       it: "Sito per studio creativo con griglia su misura e hosting statico veloce.",
     },
     image: null, // add a screenshot: "/images/work/sevenhalflab.jpg"
-    cover: { bg: "#15120E", fg: "#E2A93B" },
+    cover: { bg: "#10281F", fg: "#F0B23E" },
     featured: true,
   },
   {
@@ -172,20 +172,14 @@ export const portfolio: PortfolioItem[] = [
     image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39",
     cover: { bg: "#14202B", fg: "#C9A66B" },
   },
-  {
-    title: "Your project",
-    year: "2026",
-    category: { en: "Placeholder · local shop", it: "Segnaposto · negozio locale" },
-    description: { en: "Swap this slot for a real client in src/config/site.ts.", it: "Sostituisci questo spazio con un cliente reale in src/config/site.ts." },
-    image: null,
-    cover: { bg: "#E2A93B", fg: "#15120E" },
-  },
-  {
-    title: "Another project",
-    year: "2026",
-    category: { en: "Placeholder · studio / salon", it: "Segnaposto · studio / salone" },
-    description: { en: "Swap this slot for a real client in src/config/site.ts.", it: "Sostituisci questo spazio con un cliente reale in src/config/site.ts." },
-    image: null,
-    cover: { bg: "#B8321A", fg: "#F2ECE1" },
-  },
+  // Add real projects here. Copy this shape:
+  // {
+  //   title: "Bar Esempio",
+  //   url: "https://example.com",
+  //   year: "2026",
+  //   category: { en: "Café", it: "Bar" },
+  //   description: { en: "One-page site with menu and map.", it: "Sito di una pagina con menu e mappa." },
+  //   image: "/images/work/bar-esempio.jpg",
+  //   cover: { bg: "#1F4D3B", fg: "#FAFAF7" },
+  // },
 ];

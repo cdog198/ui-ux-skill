@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowRight, Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Reveal } from "@/components/ui/Reveal";
 import { contact, contactForm, pricing, type TierId } from "@/config/site";
 import { useT } from "@/lib/i18n";
 import { SELECT_PLAN_EVENT } from "./Pricing";
-import { SectionHead } from "./SectionHead";
+import { Section, btn } from "./Section";
 
 type Status = "idle" | "sending" | "success" | "error";
 type Fields = { name: string; business: string; email: string; need: string; tier: TierId | "unsure"; consent: boolean };
@@ -101,130 +100,108 @@ export function Contact() {
   ];
 
   const input =
-    "mt-2 block w-full rounded-none border-0 border-b-2 border-paper/40 bg-transparent px-0 py-3 text-lg text-paper placeholder:text-paper/40 focus:border-ochre focus:ring-0 focus:outline-none";
+    "mt-1.5 block w-full min-h-12 rounded-[4px] border border-ink/30 bg-white px-3.5 text-ink placeholder:text-muted/80 focus:border-ink focus:outline-2 focus:outline-offset-0 focus:outline-ink";
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="on-ink bg-ink text-paper">
-      <div className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6 lg:px-10 lg:py-36">
-        <SectionHead dark id="contact-title" index="08" label={t.contact.label} title={t.contact.title} intro={t.contact.intro} />
+    <Section id="contact" title={t.contact.title} intro={t.contact.intro} tone="green">
+      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="space-y-3 lg:col-span-4">
+          <a href={`https://wa.me/${contact.whatsapp}`} target="_blank" rel="noopener noreferrer" className={`${btn.primary} w-full gap-2.5`}>
+            <MessageCircle aria-hidden className="size-5" />
+            {t.contact.whatsapp}
+          </a>
+          <a href={`mailto:${contact.email}`} className={`${btn.secondaryOnGreen} w-full gap-2.5`}>
+            <Mail aria-hidden className="size-5 shrink-0" />
+            <span className="truncate">{contact.email}</span>
+          </a>
+        </div>
 
-        <div className="mt-14 grid gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-8">
-          <Reveal className="space-y-4 lg:col-span-4">
-            <a
-              href={`https://wa.me/${contact.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-4 rounded-full bg-[#25D366] px-6 py-4 font-semibold text-ink"
-            >
-              <span className="flex items-center gap-3">
-                <MessageCircle aria-hidden className="size-5" />
-                {t.contact.whatsapp}
-              </span>
-              <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a href={`mailto:${contact.email}`} className="group flex items-center justify-between gap-4 rounded-full border-2 border-paper px-6 py-4 font-semibold">
-              <span className="flex min-w-0 items-center gap-3">
-                <Mail aria-hidden className="size-5 shrink-0" />
-                <span className="truncate">{contact.email}</span>
-              </span>
-              <ArrowRight aria-hidden className="size-5 shrink-0 transition-transform group-hover:translate-x-1" />
-            </a>
-            <p className="pt-6 font-mono text-xs tracking-widest text-muted-dark uppercase">↓ {t.contact.or}</p>
-          </Reveal>
+        <div className="rounded-md bg-paper p-6 text-ink sm:p-8 lg:col-span-8">
+          {status === "success" ? (
+            <div role="status">
+              <p className="heading text-3xl">{f.successTitle}</p>
+              <p className="mt-2 text-lg text-muted">{f.successBody}</p>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} noValidate className="grid gap-5 sm:grid-cols-2">
+              <p className="font-semibold sm:col-span-2">{t.contact.or}</p>
+              <Field id="contact-name" label={f.name} error={errors.name}>
+                <input id="contact-name" name="name" autoComplete="name" required value={fields.name} onChange={(e) => set("name", e.target.value)} aria-invalid={!!errors.name} aria-describedby={errors.name ? "contact-name-error" : undefined} className={input} />
+              </Field>
+              <Field id="contact-business" label={f.business}>
+                <input id="contact-business" name="business" autoComplete="organization" value={fields.business} onChange={(e) => set("business", e.target.value)} className={input} />
+              </Field>
+              <Field id="contact-email" label={f.email} error={errors.email} className="sm:col-span-2">
+                <input id="contact-email" name="email" type="email" autoComplete="email" required value={fields.email} onChange={(e) => set("email", e.target.value)} aria-invalid={!!errors.email} aria-describedby={errors.email ? "contact-email-error" : undefined} className={input} />
+              </Field>
+              <Field id="contact-need" label={f.need} error={errors.need} className="sm:col-span-2">
+                <textarea id="contact-need" name="message" rows={4} required placeholder={f.needPlaceholder} value={fields.need} onChange={(e) => set("need", e.target.value)} aria-invalid={!!errors.need} aria-describedby={errors.need ? "contact-need-error" : undefined} className={`${input} resize-y py-3`} />
+              </Field>
 
-          <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-            {status === "success" ? (
-              <div role="status" className="border-2 border-ochre p-8 lg:p-12">
-                <p className="display text-6xl text-ochre">{f.successTitle}</p>
-                <p className="mt-4 text-lg text-muted-dark">{f.successBody}</p>
+              <fieldset className="sm:col-span-2">
+                <legend className="font-semibold">{f.tier}</legend>
+                <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+                  {tiers.map((tier) => (
+                    <label key={tier.id} className="flex min-h-10 cursor-pointer items-center gap-2">
+                      <input type="radio" name="tier" value={tier.id} checked={fields.tier === tier.id} onChange={() => set("tier", tier.id)} className="size-4 accent-[var(--color-green)]" />
+                      {tier.label}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              {/* Honeypot (hidden from people and screen readers) */}
+              <div aria-hidden="true" className="hidden">
+                <label>
+                  Leave empty <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
+                </label>
               </div>
-            ) : (
-              <form onSubmit={onSubmit} noValidate className="grid gap-8 sm:grid-cols-2">
-                <Field id="contact-name" label={f.name} error={errors.name}>
-                  <input id="contact-name" name="name" autoComplete="name" required value={fields.name} onChange={(e) => set("name", e.target.value)} aria-invalid={!!errors.name} aria-describedby={errors.name ? "contact-name-error" : undefined} className={input} />
-                </Field>
-                <Field id="contact-business" label={f.business}>
-                  <input id="contact-business" name="business" autoComplete="organization" value={fields.business} onChange={(e) => set("business", e.target.value)} className={input} />
-                </Field>
-                <Field id="contact-email" label={f.email} error={errors.email} className="sm:col-span-2">
-                  <input id="contact-email" name="email" type="email" autoComplete="email" required value={fields.email} onChange={(e) => set("email", e.target.value)} aria-invalid={!!errors.email} aria-describedby={errors.email ? "contact-email-error" : undefined} className={input} />
-                </Field>
-                <Field id="contact-need" label={f.need} error={errors.need} className="sm:col-span-2">
-                  <textarea id="contact-need" name="message" rows={4} required placeholder={f.needPlaceholder} value={fields.need} onChange={(e) => set("need", e.target.value)} aria-invalid={!!errors.need} aria-describedby={errors.need ? "contact-need-error" : undefined} className={`${input} resize-y`} />
-                </Field>
 
-                <fieldset className="sm:col-span-2">
-                  <legend className="font-mono text-xs tracking-widest text-muted-dark uppercase">{f.tier}</legend>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {tiers.map((tier) => (
-                      <label key={tier.id} className="cursor-pointer">
-                        <input type="radio" name="tier" value={tier.id} checked={fields.tier === tier.id} onChange={() => set("tier", tier.id)} className="peer sr-only" />
-                        <span className="inline-flex min-h-11 items-center rounded-full border-2 border-paper/40 px-5 font-semibold transition-colors peer-checked:border-ochre peer-checked:bg-ochre peer-checked:text-ink peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ochre">
-                          {tier.label}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
+              <div className="sm:col-span-2">
+                <label className="flex cursor-pointer items-start gap-3 text-muted">
+                  <input id="contact-consent" type="checkbox" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} aria-invalid={!!errors.consent} aria-describedby={errors.consent ? "contact-consent-error" : undefined} className="mt-1 size-4 shrink-0 accent-[var(--color-green)]" />
+                  <span>
+                    {f.consent}{" "}
+                    <Link href="/privacy" className="text-ink underline underline-offset-4">
+                      {f.privacy}
+                    </Link>
+                    .
+                  </span>
+                </label>
+                {errors.consent && (
+                  <p id="contact-consent-error" className="mt-1.5 text-sm font-semibold text-[#A3262F]">
+                    {errors.consent}
+                  </p>
+                )}
+              </div>
 
-                {/* Honeypot (hidden from people and screen readers) */}
-                <div aria-hidden="true" className="hidden">
-                  <label>
-                    Leave empty <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" />
-                  </label>
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label className="flex cursor-pointer items-start gap-3 text-muted-dark">
-                    <input id="contact-consent" type="checkbox" checked={fields.consent} onChange={(e) => set("consent", e.target.checked)} aria-invalid={!!errors.consent} aria-describedby={errors.consent ? "contact-consent-error" : undefined} className="mt-1 size-5 shrink-0 accent-[var(--color-ochre)]" />
-                    <span>
-                      {f.consent}{" "}
-                      <Link href="/privacy" className="text-paper underline underline-offset-4">
-                        {f.privacy}
-                      </Link>
-                      .
-                    </span>
-                  </label>
-                  {errors.consent && (
-                    <p id="contact-consent-error" className="mt-2 text-sm font-semibold text-rosso-bright">
-                      {errors.consent}
-                    </p>
-                  )}
-                </div>
-
-                <div className="sm:col-span-2">
-                  <button
-                    type="submit"
-                    disabled={status === "sending"}
-                    className="group inline-flex min-h-14 w-full cursor-pointer items-center justify-center gap-3 rounded-full bg-rosso-bright px-8 text-lg font-semibold text-ink transition-transform hover:-translate-y-0.5 disabled:opacity-60 sm:w-auto"
-                  >
-                    {status === "sending" ? f.sending : f.submit}
-                    <ArrowRight aria-hidden className="size-5 transition-transform group-hover:translate-x-1" />
-                  </button>
-                  {status === "error" && (
-                    <p role="alert" className="mt-4 font-semibold text-rosso-bright">
-                      {f.error}
-                    </p>
-                  )}
-                </div>
-              </form>
-            )}
-          </Reveal>
+              <div className="sm:col-span-2">
+                <button type="submit" disabled={status === "sending"} className={`${btn.primary} w-full cursor-pointer disabled:opacity-60 sm:w-auto`}>
+                  {status === "sending" ? f.sending : f.submit}
+                </button>
+                {status === "error" && (
+                  <p role="alert" className="mt-3 font-semibold text-[#A3262F]">
+                    {f.error}
+                  </p>
+                )}
+              </div>
+            </form>
+          )}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
 
 function Field({ id, label, error, className = "", children }: { id: string; label: string; error?: string; className?: string; children: React.ReactNode }) {
   return (
     <div className={className}>
-      <label htmlFor={id} className="font-mono text-xs tracking-widest text-muted-dark uppercase">
+      <label htmlFor={id} className="text-sm font-semibold">
         {label}
       </label>
       {children}
       {error && (
-        <p id={`${id}-error`} className="mt-2 text-sm font-semibold text-rosso-bright">
+        <p id={`${id}-error`} className="mt-1.5 text-sm font-semibold text-[#A3262F]">
           {error}
         </p>
       )}

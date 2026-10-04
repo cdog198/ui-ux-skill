@@ -1,10 +1,9 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { Reveal } from "@/components/ui/Reveal";
 import { pricing, type Tier, type TierId } from "@/config/site";
 import { fill, formatEuro, useL, useLang, useT } from "@/lib/i18n";
-import { SectionHead } from "./SectionHead";
+import { Section, btn } from "./Section";
 
 /** Lets pricing buttons pre-select a plan in the contact form. */
 export const SELECT_PLAN_EVENT = "cpd:select-plan";
@@ -14,95 +13,72 @@ export function selectPlan(id: TierId) {
 
 export function Pricing() {
   const t = useT();
+  const months = pricing.minimumTermMonths;
   return (
-    <section id="pricing" aria-labelledby="pricing-title" className="mx-auto max-w-[1440px] px-4 py-24 sm:px-6 lg:px-10 lg:py-36">
-      <SectionHead id="pricing-title" index="03" label={t.pricing.label} title={t.pricing.title} intro={t.pricing.intro} />
-
-      <div className="mt-16 grid gap-6 lg:mt-24 lg:grid-cols-3 lg:gap-0">
-        {pricing.tiers.map((tier, i) => (
-          <TierColumn key={tier.id} tier={tier} index={i} />
+    <Section id="pricing" title={t.pricing.title} intro={t.pricing.intro}>
+      <div className="grid gap-5 lg:grid-cols-3 lg:items-stretch">
+        {pricing.tiers.map((tier) => (
+          <TierCard key={tier.id} tier={tier} />
         ))}
       </div>
 
-      <Reveal className="mt-10 grid gap-4 border-2 border-dashed border-ink p-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-8 lg:p-8">
-        <p className="display text-6xl text-rosso lg:text-7xl">
-          {pricing.minimumTermMonths}
-          <span className="serif-accent ml-2 text-2xl text-ink lg:text-3xl">{t.pricing.termUnit}</span>
-        </p>
-        <div>
-          <h3 className="text-xl font-bold">{fill(t.pricing.termTitle, { months: pricing.minimumTermMonths })}</h3>
-          <p className="mt-2 max-w-3xl leading-relaxed text-muted">{t.pricing.termBody}</p>
-        </div>
-      </Reveal>
+      <div className="mt-10 max-w-[64ch]">
+        <h3 className="text-xl font-bold">{fill(t.pricing.termTitle, { months })}</h3>
+        <p className="mt-2 text-lg leading-relaxed text-muted">{fill(t.pricing.termBody, { months })}</p>
+      </div>
 
       <Comparison />
-    </section>
+    </Section>
   );
 }
 
-function TierColumn({ tier, index }: { tier: Tier; index: number }) {
+function TierCard({ tier }: { tier: Tier }) {
   const t = useT();
   const tr = useL();
   const { lang } = useLang();
   const popular = tier.popular;
 
   return (
-    <Reveal
-      delay={index * 0.08}
-      className={`relative flex flex-col p-7 lg:p-10 ${
-        popular
-          ? "on-ink z-10 bg-ink text-paper shadow-[12px_12px_0_var(--color-rosso)] lg:-my-6 lg:py-16"
-          : "border-2 border-ink bg-paper lg:border-x-0 first:lg:border-l-2 last:lg:border-r-2"
-      }`}
-    >
-      {popular && (
-        <p className="absolute -top-4 left-7 rounded-full bg-rosso px-4 py-1.5 font-mono text-xs font-semibold tracking-wider text-paper uppercase lg:left-10">
-          ★ {t.pricing.popular}
-        </p>
-      )}
-      <h3 className="display-wide text-lg">{tier.name}</h3>
-      <p className={`mt-2 min-h-12 leading-snug ${popular ? "text-muted-dark" : "text-muted"}`}>{tr(tier.summary)}</p>
+    <div className={`flex flex-col rounded-md p-7 lg:p-8 ${popular ? "on-green bg-green text-paper" : "border border-ink/25"}`}>
+      <div className="flex items-baseline justify-between gap-3">
+        <h3 className="text-2xl font-bold">{tier.name}</h3>
+        {popular && <span className="text-sm font-semibold text-ochre">{t.pricing.popular}</span>}
+      </div>
+      <p className={`mt-1 leading-snug ${popular ? "text-green-soft" : "text-muted"}`}>{tr(tier.summary)}</p>
 
       <p className="mt-6 flex items-end gap-2">
-        <span className={`display text-[6.5rem] leading-[0.8] ${popular ? "text-ochre" : "text-ink"}`}>{formatEuro(tier.monthly, lang)}</span>
-        <span className="pb-1">
-          <span className="block font-semibold">{t.pricing.perMonth}</span>
-          <span className={`block font-mono text-xs ${popular ? "text-muted-dark" : "text-muted"}`}>{t.pricing.vat}</span>
+        <span className="display text-[5.5rem]">{formatEuro(tier.monthly, lang)}</span>
+        <span className={`pb-1.5 text-sm ${popular ? "text-green-soft" : "text-muted"}`}>
+          {t.pricing.perMonth}
+          <br />
+          {t.pricing.vat}
         </span>
       </p>
 
-      <ul className="mt-8 flex-1 space-y-3">
+      <ul className="mt-6 flex-1 space-y-2.5">
         {tier.features.map((f) => (
-          <li key={f.en} className="flex gap-3">
-            <Check aria-hidden className={`mt-0.5 size-5 shrink-0 ${popular ? "text-rosso-bright" : "text-rosso"}`} strokeWidth={2.5} />
+          <li key={f.en} className="flex gap-2.5">
+            <Check aria-hidden className={`mt-1 size-4 shrink-0 ${popular ? "text-ochre" : "text-green"}`} strokeWidth={3} />
             <span>{tr(f)}</span>
           </li>
         ))}
       </ul>
 
-      <a
-        href="#contact"
-        onClick={() => selectPlan(tier.id)}
-        className={`mt-10 inline-flex min-h-13 items-center justify-center rounded-full px-6 py-3.5 font-semibold transition-transform hover:-translate-y-0.5 ${
-          popular ? "bg-rosso-bright text-ink" : "border-2 border-ink hover:bg-ink hover:text-paper"
-        }`}
-      >
+      <a href="#contact" onClick={() => selectPlan(tier.id)} className={`mt-8 ${popular ? btn.primary : btn.secondary}`}>
         {fill(t.pricing.choose, { name: tier.name })}
       </a>
-    </Reveal>
+    </div>
   );
 }
 
-/** Two receipts side by side: typical agency vs CPD, year one. */
+/** Two printed receipts side by side: typical agency vs CPD, first year. */
 function Comparison() {
   const t = useT();
   const { lang } = useLang();
   const eur = (n: number) => formatEuro(n, lang);
   const ref = pricing.tiers.find((x) => x.popular) ?? pricing.tiers[0];
   const a = pricing.agency;
-  const agencyYearMin = a.buildMin + (a.hostingMonthly + a.maintenanceMonthly) * 12;
-  const agencyYearMax = a.buildMax + (a.hostingMonthly + a.maintenanceMonthly) * 12;
-  const ours = ref.monthly * 12;
+  const ongoing = (a.hostingMonthly + a.maintenanceMonthly) * 12;
 
   const rows: [string, string, string][] = [
     [t.pricing.rows.build, `${eur(a.buildMin)}–${eur(a.buildMax)}`, eur(0)],
@@ -113,37 +89,30 @@ function Comparison() {
   ];
 
   return (
-    <div className="mt-24 lg:mt-32">
-      <Reveal className="max-w-3xl">
-        <h3 className="display text-[clamp(2.6rem,6vw,4.75rem)]">{t.pricing.compareTitle}</h3>
-        <p className="mt-3 text-lg text-muted">{t.pricing.compareIntro}</p>
-      </Reveal>
+    <div className="mt-20">
+      <h3 className="heading text-[clamp(1.6rem,3vw,2.25rem)]">{t.pricing.compareTitle}</h3>
+      <p className="mt-2 text-lg text-muted">{t.pricing.compareIntro}</p>
 
-      <div className="mt-10 grid items-start gap-8 md:grid-cols-2 lg:gap-14">
-        <Reveal>
-          <ReceiptCard
-            title={t.pricing.agency}
-            rows={rows.map(([l, v]) => [l, v])}
-            due={`${eur(a.buildMin)}–${eur(a.buildMax)}`}
-            year={`${eur(agencyYearMin)}–${eur(agencyYearMax)}`}
-            muted
-          />
-        </Reveal>
-        <Reveal delay={0.12}>
-          <ReceiptCard title={t.pricing.you} rows={rows.map(([l, , v]) => [l, v])} due={eur(0)} year={eur(ours)} />
-        </Reveal>
+      <div className="mt-8 grid items-start gap-6 md:grid-cols-2 lg:gap-10">
+        <ReceiptCard
+          title={t.pricing.agency}
+          rows={rows.map(([l, v]) => [l, v])}
+          due={`${eur(a.buildMin)}–${eur(a.buildMax)}`}
+          year={`${eur(a.buildMin + ongoing)}–${eur(a.buildMax + ongoing)}`}
+        />
+        <ReceiptCard title={t.pricing.you} rows={rows.map(([l, , v]) => [l, v])} due={eur(0)} year={eur(ref.monthly * 12)} ours />
       </div>
-      <p className="mt-6 font-mono text-xs text-muted">{fill(t.pricing.basedOn, { name: ref.name })}</p>
+      <p className="mt-5 text-sm text-muted">{fill(t.pricing.basedOn, { name: ref.name })}</p>
     </div>
   );
 }
 
-function ReceiptCard({ title, rows, due, year, muted = false }: { title: string; rows: [string, string][]; due: string; year: string; muted?: boolean }) {
+function ReceiptCard({ title, rows, due, year, ours = false }: { title: string; rows: [string, string][]; due: string; year: string; ours?: boolean }) {
   const t = useT();
   return (
-    <div className={`receipt-edge px-6 pt-7 pb-10 font-mono text-sm sm:px-8 ${muted ? "bg-paper-2 md:rotate-[-1deg]" : "bg-receipt shadow-[0_24px_50px_-30px_rgb(21_18_14/0.5)] md:rotate-[1deg]"}`}>
-      <p className="display-wide text-center text-base">{title}</p>
-      <dl className="mt-5 space-y-2 border-t border-dashed border-ink/40 pt-4">
+    <div className={`receipt-edge relative px-6 pt-6 pb-9 font-mono text-[13px] ${ours ? "bg-white shadow-[0_18px_40px_-26px_rgb(0_0_0/0.55)]" : "bg-paper-2"}`}>
+      <p className="text-center font-semibold">{title}</p>
+      <dl className="mt-4 space-y-1.5 border-t border-dashed border-ink/50 pt-3">
         {rows.map(([label, value]) => (
           <div key={label} className="flex items-end gap-2">
             <dt className="shrink-0">{label}</dt>
@@ -152,16 +121,17 @@ function ReceiptCard({ title, rows, due, year, muted = false }: { title: string;
           </div>
         ))}
       </dl>
-      <dl className="mt-5 space-y-2 border-t-2 border-ink pt-4">
-        <div className="flex items-end justify-between gap-4">
-          <dt className="font-semibold">{t.pricing.rows.dueToday}</dt>
-          <dd className={`display text-right text-4xl leading-none sm:text-5xl ${muted ? "text-ink" : "text-rosso"}`}>{due}</dd>
+      <dl className="mt-4 space-y-1 border-t border-dashed border-ink/50 pt-3">
+        <div className="flex items-baseline justify-between gap-4 font-semibold">
+          <dt>{t.pricing.rows.dueToday}</dt>
+          <dd className="text-right text-lg">{due}</dd>
         </div>
-        <div className="flex items-end justify-between gap-4 text-muted">
+        <div className="flex items-baseline justify-between gap-4">
           <dt>{t.pricing.rows.yearOne}</dt>
           <dd className="text-right">{year}</dd>
         </div>
       </dl>
+      {ours && <span aria-hidden className="absolute inset-y-0 right-1.5 w-1 bg-stripe/70" />}
     </div>
   );
 }

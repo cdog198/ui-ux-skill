@@ -48,22 +48,22 @@ export function ExampleChrome({ features, children }: { features: FeatureDef[]; 
           type="button"
           onClick={() => setShow((s) => !s)}
           aria-pressed={show}
-          className={`inline-flex min-h-11 w-fit cursor-pointer items-center gap-2 rounded-full border-2 border-[#15120E] px-4 text-sm font-semibold shadow-lg transition-colors ${
-            show ? "bg-[#E2A93B] text-[#15120E]" : "bg-[#F2ECE1] text-[#15120E] hover:bg-white"
+          className={`inline-flex min-h-11 w-fit cursor-pointer items-center gap-2 rounded-[4px] border-2 border-[#10281F] px-4 text-sm font-semibold shadow-lg transition-colors ${
+            show ? "bg-[#F0B23E] text-[#10281F]" : "bg-[#FAFAF7] text-[#10281F] hover:bg-white"
           }`}
         >
           {show ? <X aria-hidden className="size-4" /> : <Layers aria-hidden className="size-4" />}
           {show ? tr(ui.hide) : tr(ui.show)}
-          <span className="rounded-full bg-[#15120E] px-2 py-0.5 text-xs text-[#F2ECE1]">{features.length}</span>
+          <span className="rounded-full bg-[#10281F] px-2 py-0.5 text-xs text-[#FAFAF7]">{features.length}</span>
         </button>
         <Link
           href="/#contact"
-          className="group inline-flex min-h-11 items-center gap-3 rounded-full bg-[#15120E] py-1.5 pr-4 pl-1.5 text-[#F2ECE1] shadow-lg"
+          className="group inline-flex min-h-11 items-center gap-3 rounded-[4px] bg-[#10281F] py-1.5 pr-4 pl-1.5 text-[#FAFAF7] shadow-lg"
         >
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#B8321A] text-[11px] font-black tracking-tight">CPD</span>
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-[3px] bg-[#1F4D3B] text-[11px] font-black tracking-tight text-[#F0B23E]">CPD</span>
           <span className="text-xs leading-tight sm:text-sm">
             <span className="block opacity-80">{tr(ui.badge)}</span>
-            <span className="block font-semibold text-[#E2A93B] group-hover:underline">{tr(ui.cta)} →</span>
+            <span className="block font-semibold text-[#F0B23E] group-hover:underline">{tr(ui.cta)}</span>
           </span>
         </Link>
       </div>
@@ -109,18 +109,18 @@ export function FeatureZone({
       {children}
       {show && feature && (
         <>
-          <span aria-hidden className="pointer-events-none absolute inset-1 z-40 rounded-md border-2 border-dashed border-[#E8462A] bg-[#E8462A]/[0.04]" />
+          <span aria-hidden className="pointer-events-none absolute inset-1 z-40 rounded-md border-2 border-dashed border-[#D9346B] bg-[#D9346B]/[0.04]" />
           <span
             role="note"
-            className={`absolute ${pos} z-50 w-max max-w-[min(17rem,calc(100vw-2rem))] rounded-md bg-[#15120E] p-3 text-left font-[family-name:var(--font-archivo)] text-[#F2ECE1] shadow-xl`}
+            className={`absolute ${pos} z-50 w-max max-w-[min(17rem,calc(100vw-2rem))] rounded-md bg-[#10281F] p-3 text-left font-[family-name:var(--font-archivo)] text-[#FAFAF7] shadow-xl`}
           >
             <span className="flex items-center gap-2">
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#E8462A] text-xs font-bold text-[#15120E]">{index + 1}</span>
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#D9346B] text-xs font-bold text-[#10281F]">{index + 1}</span>
               <span className="text-sm leading-tight font-bold">{tr(feature.label)}</span>
             </span>
-            <span className="mt-1.5 block text-xs leading-snug text-[#D9D0C3]">{tr(feature.description)}</span>
+            <span className="mt-1.5 block text-xs leading-snug text-[#C9D6CF]">{tr(feature.description)}</span>
             {tier && (
-              <span className="mt-2 inline-block rounded-full border border-[#E2A93B] px-2 py-0.5 font-mono text-[10px] tracking-wider text-[#E2A93B] uppercase">
+              <span className="mt-2 inline-block rounded-[3px] border border-[#F0B23E] px-2 py-0.5 text-[11px] font-semibold text-[#F0B23E]">
                 {lang === "it" ? `${tr(ui.from)} ${tr(ui.plan)} ${tier.name}` : `${tier.name} ${tr(ui.plan)}+`}
               </span>
             )}

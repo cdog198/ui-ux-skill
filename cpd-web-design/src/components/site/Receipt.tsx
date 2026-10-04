@@ -1,82 +1,106 @@
 "use client";
 
 import { m, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { pricing, site } from "@/config/site";
 import { fill, formatEuro, useLang, useT } from "@/lib/i18n";
 
-/** The hero "scontrino": the business model in one glance. */
+/**
+ * The hero device: an Italian "documento commerciale" for the site build, totalling €0,00,
+ * printed out of a till slot. This is the page's one piece of non-interactive motion.
+ */
 export function Receipt() {
   const t = useT();
   const { lang } = useLang();
   const reduce = useReducedMotion();
   const lowest = Math.min(...pricing.tiers.map((x) => x.monthly));
+  const [stamp, setStamp] = useState("");
 
-  const line = (i: number) => ({
-    initial: reduce ? false : { opacity: 0, y: -6 },
-    animate: { opacity: 1, y: 0 },
-    transition: { delay: 0.35 + i * 0.12, duration: 0.35 },
-  });
+  // Date and time printed in Rome time, like a real till. Client-only to avoid hydration mismatch.
+  useEffect(() => {
+    const now = new Intl.DateTimeFormat("it-IT", {
+      timeZone: "Europe/Rome",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(new Date());
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setStamp(now.replace(",", ""));
+  }, []);
+
+  const monthly = fill(t.receipt.from, { price: formatEuro(lowest, lang) });
 
   return (
-    <div className="relative mx-auto w-full max-w-[360px] rotate-[1.5deg] lg:max-w-[380px]">
-      <m.div
-        initial={reduce ? false : { clipPath: "inset(0 0 100% 0)" }}
-        animate={{ clipPath: "inset(0 0 -10% 0)" }}
-        transition={{ duration: 1.1, ease: [0.6, 0, 0.2, 1] }}
-        className="receipt-edge bg-receipt px-6 pt-7 pb-10 font-mono text-[13px] leading-relaxed text-ink shadow-[0_30px_60px_-30px_rgb(21_18_14/0.45)]"
-        aria-label={`${t.receipt.total}: ${formatEuro(0, lang)}. ${t.receipt.then}: ${fill(t.receipt.from, { price: formatEuro(lowest, lang) })}`}
-        role="img"
-      >
-        <div className="text-center" aria-hidden="true">
-          <p className="display-wide text-base">{t.receipt.shop}</p>
-          <p className="mt-1 text-[11px] text-muted">{fill(t.receipt.place, { vat: site.vatNumber.replace(/^IT/, "") })}</p>
-          <p className="mt-3 border-y border-dashed border-ink/40 py-1 text-[11px] tracking-widest">
-            ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★
-          </p>
-        </div>
-
-        <ul className="mt-4 space-y-1.5" aria-hidden="true">
-          {t.receipt.lines.map(([label, price], i) => (
-            <m.li key={i} {...line(i)} className="flex items-end gap-2">
-              <span className="whitespace-nowrap">{label}</span>
-              <span className="dotted-leader mb-1.5 h-2 flex-1" />
-              <span>€ {price}</span>
-            </m.li>
-          ))}
-        </ul>
-
-        <m.div {...line(t.receipt.lines.length)} aria-hidden="true" className="mt-4 flex items-end justify-between border-t-2 border-ink pt-3">
-          <span className="font-semibold">{t.receipt.total}</span>
-          <span className="display text-5xl leading-none text-rosso">€ 0,00</span>
-        </m.div>
-
-        <m.div {...line(t.receipt.lines.length + 1)} aria-hidden="true" className="mt-4 border-t border-dashed border-ink/40 pt-3">
-          <div className="flex items-end justify-between">
-            <span className="text-[11px] tracking-wider">{t.receipt.then}</span>
-            <span className="font-semibold">
-              {fill(t.receipt.from, { price: formatEuro(lowest, lang) })}
-              <span className="text-muted">{t.pricing.perMonthShort}</span>
-            </span>
+    <div className="relative mx-auto w-full max-w-[340px]">
+      {/* Till slot */}
+      <div aria-hidden className="relative z-10 mx-[-14px] h-3 rounded-full bg-ink shadow-[0_2px_0_rgb(0_0_0/0.25)]" />
+      <div className="-mt-1.5 overflow-hidden pb-6">
+        <m.div
+          initial={reduce ? false : { y: "-100%" }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.6, ease: [0.45, 0, 0.25, 1], delay: 0.2 }}
+          role="img"
+          aria-label={`${t.receipt.total}: ${formatEuro(0, lang)}. ${t.receipt.then}: ${monthly} (${t.receipt.covers}).`}
+          className="receipt-edge relative bg-white px-5 pt-6 pb-9 font-mono text-[12.5px] leading-[1.55] text-ink shadow-[0_18px_40px_-24px_rgb(0_0_0/0.6)]"
+        >
+          <div aria-hidden className="text-center">
+            <p className="text-[15px] font-semibold">CPD WEB DESIGN</p>
+            <p>Roma</p>
+            <p>P.IVA {site.vatNumber.replace(/^IT/, "")}</p>
+            <p className="mt-3 font-semibold">{t.receipt.doc}</p>
+            <p>{t.receipt.docSub}</p>
           </div>
-          <p className="mt-1 text-[11px] text-muted">{t.receipt.covers}</p>
+
+          <div aria-hidden className="mt-4 flex justify-between border-b border-dashed border-ink/50 pb-1">
+            <span>{t.receipt.description}</span>
+            <span>{t.receipt.price}</span>
+          </div>
+          <ul aria-hidden className="mt-1.5 space-y-0.5">
+            {t.receipt.lines.map(([label, price], i) => (
+              <li key={i} className="flex items-end gap-2">
+                <span>{label}</span>
+                <span className="dotted-leader mb-1.5 h-2 flex-1" />
+                <span>{price}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div aria-hidden className="mt-3 border-t border-dashed border-ink/50 pt-2">
+            <p className="flex items-baseline justify-between pt-3 font-semibold">
+              <span>{t.receipt.total}</span>
+              {/* Tills print the total double-height */}
+              <span className="origin-bottom scale-y-[1.9] text-[22px] leading-none">0,00</span>
+            </p>
+            <p className="mt-2 flex justify-between">
+              <span>{t.receipt.vat}</span>
+              <span>0,00</span>
+            </p>
+            <p className="flex justify-between">
+              <span>{t.receipt.payment}</span>
+              <span>{t.receipt.paymentValue}</span>
+            </p>
+          </div>
+
+          <div aria-hidden className="mt-3 flex justify-between border-t border-dashed border-ink/50 pt-2 text-[11.5px]">
+            <span className="min-w-[8.5rem]">{stamp}</span>
+            <span>DOC.N. 0001-0001</span>
+          </div>
+
+          <div aria-hidden className="mt-4 border-t border-dashed border-ink/50 pt-3 text-center">
+            <p>{t.receipt.then}:</p>
+            <p className="font-semibold">
+              {monthly}
+              {t.pricing.perMonthShort}
+            </p>
+            <p className="text-[11.5px]">{t.receipt.covers}</p>
+          </div>
+
+          {/* End-of-roll stripe, as on real till paper */}
+          <span aria-hidden className="absolute inset-y-0 right-1.5 w-1 bg-stripe/70" />
         </m.div>
-
-        <p className="mt-6 text-center text-[11px] tracking-[0.3em]" aria-hidden="true">
-          {t.receipt.thanks}
-        </p>
-        <div aria-hidden="true" className="mx-auto mt-3 h-8 w-40 bg-[repeating-linear-gradient(90deg,var(--color-ink)_0_2px,transparent_2px_4px,var(--color-ink)_4px_5px,transparent_5px_8px)]" />
-      </m.div>
-
-      {/* Rubber stamp */}
-      <m.div
-        aria-hidden="true"
-        initial={reduce ? false : { opacity: 0, scale: 1.8, rotate: -24 }}
-        animate={{ opacity: 1, scale: 1, rotate: -14 }}
-        transition={{ delay: 1.3, type: "spring", stiffness: 260, damping: 16 }}
-        className="absolute right-2 bottom-[16%] rounded-md border-[3px] border-rosso px-3 py-1 text-rosso mix-blend-multiply sm:-right-8"
-      >
-        <span className="display block text-5xl leading-none">{t.receipt.stamp}</span>
-      </m.div>
+      </div>
     </div>
   );
 }

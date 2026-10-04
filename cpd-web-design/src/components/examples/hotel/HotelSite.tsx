@@ -28,7 +28,6 @@ import { Gallery } from "@/components/examples/Lightbox";
 import { MapEmbed, directionsUrl } from "@/components/examples/MapEmbed";
 import { LangToggle } from "@/components/ui/LangToggle";
 import { Photo } from "@/components/ui/Photo";
-import { Reveal } from "@/components/ui/Reveal";
 import { hotel as h, hotelMeta, type AmenityIcon } from "@/content/examples/hotel";
 import { fill, formatEuro, useL, useLang } from "@/lib/i18n";
 import { AvailabilitySearch, HotelBooking, type StaySearch } from "./HotelBooking";
@@ -136,14 +135,14 @@ export function HotelSite() {
 
           {/* ── Intro ── */}
           <section className="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:py-32">
-            <Reveal className="lg:col-span-5">
+            <div className="lg:col-span-5">
               <h2 className={`${display} text-5xl leading-[1.02] sm:text-6xl`}>{tr(h.intro.title)}</h2>
-            </Reveal>
-            <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7">
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7">
               <p className="text-lg leading-relaxed text-[#14202B]/80 first-letter:float-left first-letter:mr-3 first-letter:font-[family-name:var(--font-vg-display)] first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-[#7A5A2E]">
                 {tr(h.intro.body)}
               </p>
-            </Reveal>
+            </div>
           </section>
 
           {/* ── Rooms ── */}
@@ -152,7 +151,7 @@ export function HotelSite() {
               <h2 className={`${display} text-5xl sm:text-6xl`}>{tr(h.roomsSection.title)}</h2>
               <ul className="mt-14 space-y-20 lg:space-y-28">
                 {h.rooms.map((room, i) => (
-                  <Reveal as="li" key={room.id} className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
+                  <li key={room.id} className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
                     <div className={`lg:col-span-7 ${i % 2 ? "lg:order-2" : ""}`}>
                       <RoomCarousel images={room.images} label={tr(room.name)} prevLabel={tr(h.roomsSection.prev)} nextLabel={tr(h.roomsSection.next)} />
                     </div>
@@ -190,7 +189,7 @@ export function HotelSite() {
                         </button>
                       </div>
                     </div>
-                  </Reveal>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -298,8 +297,8 @@ export function HotelSite() {
                 <p className="text-lg text-[#14202B]/80 lg:text-right">{tr(h.guide.body)}</p>
               </div>
               <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                {h.guide.items.map((g, i) => (
-                  <Reveal as="li" key={g.title.en} delay={i * 0.06}>
+                {h.guide.items.map((g) => (
+                  <li key={g.title.en}>
                     <article>
                       <div className="relative aspect-[3/4] overflow-hidden">
                         <Photo src={g.image.src} alt={tr(g.image.alt)} sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" />
@@ -308,7 +307,7 @@ export function HotelSite() {
                       <h3 className={`${display} mt-2 text-2xl`}>{tr(g.title)}</h3>
                       <p className="mt-2 text-[#14202B]/80">{tr(g.body)}</p>
                     </article>
-                  </Reveal>
+                  </li>
                 ))}
               </ul>
             </div>

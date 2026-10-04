@@ -6,7 +6,6 @@ import { Gallery } from "@/components/examples/Lightbox";
 import { MapEmbed, directionsUrl } from "@/components/examples/MapEmbed";
 import { LangToggle } from "@/components/ui/LangToggle";
 import { Photo } from "@/components/ui/Photo";
-import { Reveal } from "@/components/ui/Reveal";
 import { restaurant as r, restaurantMeta } from "@/content/examples/restaurant";
 import { useL, useLang } from "@/lib/i18n";
 import { Booking } from "./Booking";
@@ -237,7 +236,7 @@ export function RestaurantSite() {
               <div className="lg:col-span-7">
                 <h2 className="font-[family-name:var(--font-alba-display)] text-4xl text-[#2F3A1F]">{tr(r.social.title)}</h2>
                 <p className="mt-2 text-[#4A4436]">{tr(r.social.body)}</p>
-                <Reveal>
+                <div>
                   <ul className="mt-6 grid grid-cols-3 gap-2" aria-label={tr(r.social.placeholder)}>
                     {r.gallery.images.map((img, i) => (
                       <li key={i} className="relative aspect-square overflow-hidden rounded-lg">
@@ -245,7 +244,7 @@ export function RestaurantSite() {
                       </li>
                     ))}
                   </ul>
-                </Reveal>
+                </div>
                 <p className="mt-3 flex items-center gap-2 text-sm text-[#4A4436]">
                   <Camera aria-hidden className="size-4" /> {r.instagram} · {tr(r.social.placeholder)}
                 </p>
