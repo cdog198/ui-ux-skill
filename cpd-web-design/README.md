@@ -16,7 +16,7 @@ npm run lint
 
 | What | File |
 | --- | --- |
-| **Plans (€19 One page, €79 Business), what each includes, minimum term, buy-out fee, agency comparison** | `src/config/site.ts` → `pricing.plans` |
+| **Plans (€19 One page, €49 Business), what each includes, minimum term, buy-out fee, agency comparison** | `src/config/site.ts` → `pricing.plans` |
 | Contact details (email, WhatsApp, phone, VAT no., your name/photo) | `src/config/site.ts` → `site`, `contact` |
 | **Example sites / client work section** | `src/config/site.ts` → `portfolio` |
 | Contact form endpoint (Formspree) | `src/config/site.ts` → `contactForm` or env `NEXT_PUBLIC_FORM_ENDPOINT` |

@@ -89,7 +89,7 @@ export const pricing = {
     {
       id: "business",
       name: { en: "Business", it: "Business" },
-      monthly: 79,
+      monthly: 49,
       featured: true,
       audience: { en: "For restaurants, hotels, shops, studios and services.", it: "Per ristoranti, hotel, negozi, studi e servizi." },
       includes: [
