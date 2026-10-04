@@ -39,8 +39,14 @@ shows a real still with a slow drift. Keep clips 6–10 s, about 1920px wide, no
 
 The old WordPress URLs keep working: `/film/<slug>/`, `/cinema/`, `/subacquea/`, `/commercial/`,
 `/distribuzione-indipendente/`, `/chi-siamo/`, `/contatti/`. The old `/film-distribuzione/<slug>/` pages forward to
-`/film/<slug>/`, which now holds both production and distribution details. For proper 301s, add the same rules on the
-host as well.
+`/film/<slug>/`, which now holds both production and distribution details. On Vercel, `vercel.json` turns these into
+real 301 redirects. On another host, add the same rule there.
+
+## Deploy on Vercel
+
+Import the repo at vercel.com/new and set **Root Directory** to `sevenhalflab`. Leave the rest at the defaults (Next.js is
+detected). Then add `sevenhalflab.com` under Settings → Domains and point DNS as Vercel shows. Only switch DNS when the
+WordPress site can go offline.
 
 ## Not migrated yet
 
