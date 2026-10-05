@@ -1,0 +1,232 @@
+@import 'tailwindcss';
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/700.css';
+@import '@fontsource/eb-garamond/400.css';
+@import '@fontsource/eb-garamond/400-italic.css';
+@import '@fontsource-variable/inter';
+
+/* Colours shared with the map palette in src/map/style.ts */
+@theme {
+  --color-parchment: #f2e8d5;
+  --color-parchment-deep: #e9dcc2;
+  --color-vellum: #fbf6ec;
+  --color-ink: #2a1c13;
+  --color-ink-soft: #5c4636;
+  --color-terracotta: #b5532f;
+  --color-ochre: #c9962b;
+  --color-gold: #d9b45a;
+  --color-roman: #8e1b1b;
+  --color-roman-deep: #6e1212;
+  --color-olive: #6f7543;
+  --color-tiber: #5d7a7d;
+
+  --font-display: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-serif: 'EB Garamond', Georgia, serif;
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
+
+  --shadow-float: 0 1px 2px rgb(42 28 19 / 0.12), 0 8px 24px -6px rgb(42 28 19 / 0.28);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ——— Map finish: paper grain and a soft vignette over the tiles ——— */
+.map-paper {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(120% 90% at 50% 45%, transparent 55%, rgb(120 84 50 / 0.16) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .2 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+.maplibregl-ctrl-attrib {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  background: rgb(251 246 236 / 0.8) !important;
+}
+.maplibregl-ctrl-attrib a {
+  color: var(--color-ink-soft);
+}
+
+/* ——— Stop medallions ——— */
+.stop-marker {
+  --size: 38px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px; /* tap target */
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+.stop-marker .medallion {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #fffaf0, var(--color-vellum) 55%, #efe3cb);
+  border: 2px solid var(--color-roman);
+  box-shadow:
+    inset 0 0 0 2px var(--color-vellum),
+    inset 0 0 0 3px rgb(201 150 43 / 0.75),
+    var(--shadow-float);
+  color: var(--color-roman);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  transition:
+    transform 0.45s var(--ease-out-soft),
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+.stop-marker[data-long='true'] .medallion {
+  font-size: 12.5px;
+  letter-spacing: -0.01em;
+}
+
+.stop-marker .stop-label {
+  position: absolute;
+  top: calc(50% + var(--size) / 2 + 3px);
+  left: 50%;
+  translate: -50% -4px;
+  white-space: nowrap;
+  padding: 3px 9px 4px;
+  border-radius: 999px;
+  background: rgb(251 246 236 / 0.94);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.1;
+  box-shadow: 0 1px 3px rgb(42 28 19 / 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    translate 0.4s var(--ease-out-soft);
+}
+.show-stop-labels .stop-marker .stop-label,
+.stop-marker[data-selected='true'] .stop-label {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+.stop-marker:hover .medallion,
+.stop-marker:focus-visible .medallion {
+  transform: scale(1.08);
+}
+.stop-marker:focus-visible {
+  outline: none;
+}
+.stop-marker:focus-visible .medallion {
+  outline: 3px solid var(--color-ochre);
+  outline-offset: 3px;
+}
+
+/* Next stop: filled imperial red with a breathing gold halo. */
+.stop-marker[data-state='next'] .medallion {
+  background: radial-gradient(circle at 35% 30%, #b0302a, var(--color-roman) 60%, var(--color-roman-deep));
+  border-color: var(--color-gold);
+  color: #fff6e3;
+  transform: scale(1.12);
+}
+.stop-marker[data-state='next']::before {
+  content: '';
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  background: rgb(217 180 90 / 0.55);
+  animation: halo 2.4s var(--ease-out-soft) infinite;
+}
+@keyframes halo {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+/* Visited: quiet, desaturated, with a small check seal. */
+.stop-marker[data-state='done'] .medallion {
+  background: #eadfca;
+  border-color: #a99580;
+  color: #8a7663;
+  box-shadow: inset 0 0 0 2px #f1e8d6, 0 1px 2px rgb(42 28 19 / 0.15);
+  transform: scale(0.88);
+}
+.stop-marker[data-state='done'] .medallion::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 999px;
+  background: var(--color-olive)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23fbf6ec' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 13px no-repeat;
+  box-shadow: 0 0 0 1.5px var(--color-vellum);
+}
+
+.stop-marker[data-selected='true'] .medallion {
+  transform: scale(1.22);
+}
+
+/* Markers fade in one after another on first load. */
+.stop-marker[data-enter='true'] {
+  animation: marker-in 0.6s var(--ease-out-soft) both;
+  animation-delay: calc(var(--i) * 45ms + 250ms);
+}
+@keyframes marker-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
